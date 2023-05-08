@@ -1,0 +1,11 @@
+.btn-send{
+    background-color: aqua;
+    width:60px;
+    margin: 10px 10px;
+    align-items:center ;
+
+    
+}
+.btn-send:hover{
+    background-color: rgb(39, 200, 200);
+}

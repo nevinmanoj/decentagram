@@ -1,0 +1,53 @@
+.chatBubble {
+
+    background-color: antiquewhite;
+    height: 40px;
+    width: 170px;
+    margin: 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sendDiv {
+    position: absolute;
+
+    /* margin-top: 530px; */
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    /* position: sticky; */
+    bottom: 10px;
+    z-index: 999;
+}
+
+#inp {
+    margin-right: 10px;
+    width: 1400px;
+    background-color: antiquewhite;
+    border-color: white;
+    border-style: none;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.sendBtn {
+    font-size: 18px;
+    background-color: #578d5c;
+    color: white;
+    height: 40px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+input:focus {
+    outline: none;
+
+}
+
+.chatDiv {
+    display: inline;
+}

@@ -1,0 +1,109 @@
+.username,
+.password {
+  background-color: #EDF1D6;
+
+  border-radius: 15px;
+  height: 69px;
+  width: 383px;
+  padding-left: 15px;
+  border-width: 0px;
+  margin-top: 45px;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.Sign-In-Button {
+
+  position: relative;
+  background-color: #609966;
+  height: 57px;
+  width: 143px;
+  border-radius: 20px;
+  border-width: 0px;
+  font-size: 20px;
+  color: #FFFFFF;
+  margin-top: 49px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+}
+
+.Sign-In-Button:active {
+  transform: translateY(1px);
+  background-color: #578d5c;
+}
+
+a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #274BA8;
+}
+
+.toSignup {
+  font-size: 20px;
+}
+
+.login-form {
+  height: 1117px;
+  width: 557px;
+  background-color: #9DC08B;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -11rem;
+
+
+}
+
+.login-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.vector-art {
+  background-color: #EDF1D6;
+  /* height: ; */
+  /* width: 1171px; */
+  align-items: center;
+
+}
+
+.Sign-In-Button-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+
+}
+
+.cover-image {
+  height: 25rem;
+  width: 30rem;
+
+  margin-top: 8rem;
+  margin-left: 15rem;
+  border-radius: 4rem;
+  box-shadow: 5px 10px #e8e2d1;
+}
+
+
+
+.toSignup {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+
+.toSignup {
+  margin-top: 50px;
+}
+
+.log-in-text {
+  color: #FFFFFF;
+  margin-left: 0.50em;
+  cursor: pointer;
+}
