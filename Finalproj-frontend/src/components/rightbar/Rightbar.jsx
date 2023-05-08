@@ -17,7 +17,7 @@ export default function Rightbar({ profile }) {
     const navigate = useNavigate();
 
     function handleClick() {
-      navigate('/chat');
+      navigate('/testChat');
     }
 
     return (

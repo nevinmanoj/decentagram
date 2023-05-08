@@ -43,7 +43,8 @@ export const TestProvider=({children})=>{
             setconnectedAccount(accounts[0]);
         }
        
-        console.log("accounts :"+accounts);
+        console.log("connected account :"+accounts);
+    
     }
     
     const connectWallet=async()=>{

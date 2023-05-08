@@ -4,6 +4,7 @@ import { testContext } from "../../context/testContext";
 import Web3 from 'web3';
 import {chatcontractAddress,chatcontractABI} from "../chat/chatConstants";
 import React from "react";
+import Topbar from "../../components/topbar/Topbar";
 
 
 export default function TestChat() {
@@ -17,7 +18,7 @@ export default function TestChat() {
     
     let web3 = new Web3(window.ethereum)
     let chatcontract = new web3.eth.Contract(chatcontractABI, chatcontractAddress);
-       const {
+       let {
         connectedAccount
       } =  useContext(testContext);
     var accounts=[]; 
@@ -32,13 +33,13 @@ export default function TestChat() {
             // console.log(data);
             let x = data.length;
             for (var n = 0; n < x; n++) {
-              
-                if(data[n].returnValues.from===connectedAccount){
-                    console.log("Sameacc");
+               
+                if(data[n].returnValues.from.toLowerCase()===connectedAccount){
+                    
                     continue;
                 }
               
-                if((data[n].returnValues.to!==connectedAccount)){
+                if((data[n].returnValues.to.toLowerCase()===connectedAccount)){
                 
                    
               if(!myMap[data[n].returnValues.from]){
@@ -47,7 +48,7 @@ export default function TestChat() {
                
                     accounts.push(data[n].returnValues.from);
                     msgs[data[n].returnValues.from]=[];
-                    // console.log(msgs[data[n].returnValues.from]);
+                    
                 
                    
                 
@@ -58,18 +59,18 @@ export default function TestChat() {
             }
     
           
-            for(var m=0;m<accounts.length;m++){
-                // console.log(accounts[m]);
-                // console.log(msgs[accounts[m]]);
-    
-            }
+            
             setacs([accounts,msgs]);
-            // setmsgList(msgs);
+           
            
             
            
           });
     }, [connectedAccount]);
+
+    function addMessages(a){
+
+    }
     
 
       function sendNewMsg(){
@@ -92,6 +93,7 @@ export default function TestChat() {
       }
 
     return(<div>
+      <Topbar />
         <h4>Current Ac:{connectedAccount}</h4>
         <input type="text" placeholder="address" id="address-send" onChange={(e) => setaddr(e.target.value)}/><br/>
         <input type="text" placeholder="message" id="msg-send" onChange={(e) => setmsg(e.target.value)}/><br/>
@@ -102,7 +104,7 @@ export default function TestChat() {
         <ul>
             
            {acs[0].map((item, index) => (
-                    <li key={item}>{item}  :<br/> <ul>
+                    <li key={item}  class="account">{item}  :<br/> <ul>
                           
                             {acs[1][item].map((ms, ii) => (
                     <li key={ii}>{ms}</li>
@@ -111,6 +113,25 @@ export default function TestChat() {
                         </ul></li>
                 ))}
         </ul>
+        {acs[0].map((ac,i)=>(
+        
+        
+        <div class="accordion-item p-3  border-primary bg-dark"> 
+        <h2 class="accordion-header" id="flush-heading' + ac + '">
+        <button id="' + ac + '"class="accordion-button collapsed" type="button" onclick={addMessages(this)} data-bs-toggle="collapse" data-bs-target="#flush-collapse' + ac + '" aria-expanded="false" aria-controls="flush-collapse' + ac + '">
+        {ac} 
+        </button>
+        </h2>
+        <div id="flush-collapse' + ac + '" class="accordion-collapse collapse" aria-labelledby="flush-heading' + ac + '" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body" id="messagepart' + ac + '">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first items accordion body.</div>
+        </div>
+        </div>
+            
+            
+            ))}
+        
+
+        
         </div>
     </div>);
 }
