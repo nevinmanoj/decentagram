@@ -5,13 +5,16 @@ import Web3 from 'web3';
 import {chatcontractAddress,chatcontractABI} from "../chat/chatConstants";
 import React from "react";
 import Topbar from "../../components/topbar/Topbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ChatWindow from "./chatWindow";
 
 
 export default function TestChat() {
     const [msg, setmsg] = useState();
     const [addr, setaddr] = useState();
     const [acs, setacs] = useState([[],{}]);
-    // const [msgList, setmsgList] = useState({});
+    const [chatDisp, setchatDisp] = useState("");
+    
   
     
     
@@ -23,6 +26,7 @@ export default function TestChat() {
       } =  useContext(testContext);
     var accounts=[]; 
     var myMap={};
+    
     var msgs={};
     useEffect(() => {
          chatcontract.getPastEvents('message', {
@@ -35,8 +39,16 @@ export default function TestChat() {
             for (var n = 0; n < x; n++) {
                
                 if(data[n].returnValues.from.toLowerCase()===connectedAccount){
+                  if(!myMap[data[n].returnValues.to]){
+                    myMap[data[n].returnValues.to]=true;
+               
+                    accounts.push(data[n].returnValues.to);
                     
-                    continue;
+                    msgs[data[n].returnValues.to]=[[]];
+                    
+                  }
+                 
+                  msgs[data[n].returnValues.to].push([data[n].returnValues.message,"snd"]);
                 }
               
                 if((data[n].returnValues.to.toLowerCase()===connectedAccount)){
@@ -47,14 +59,14 @@ export default function TestChat() {
                 myMap[data[n].returnValues.from]=true;
                
                     accounts.push(data[n].returnValues.from);
-                    msgs[data[n].returnValues.from]=[];
-                    
+                   
+                    msgs[data[n].returnValues.from]=[[]];
                 
                    
                 
               }
-              msgs[data[n].returnValues.from].push(data[n].returnValues.message);
-            
+              
+              msgs[data[n].returnValues.from].push([data[n].returnValues.message,"rec"]);
             }
             }
     
@@ -68,10 +80,12 @@ export default function TestChat() {
           });
     }, [connectedAccount]);
 
-    function addMessages(a){
+    
+    function expand(a){
+      
+      setchatDisp(a);
 
     }
-    
 
       function sendNewMsg(){
         var message=msg;
@@ -91,47 +105,45 @@ export default function TestChat() {
             }
         });
       }
+      
 
     return(<div>
       <Topbar />
-        <h4>Current Ac:{connectedAccount}</h4>
+      
+      <div class="chat-outer">
+        
+      <div class="chat-list" >
+        <h6>Current Ac: <br />{connectedAccount}</h6>
         <input type="text" placeholder="address" id="address-send" onChange={(e) => setaddr(e.target.value)}/><br/>
         <input type="text" placeholder="message" id="msg-send" onChange={(e) => setmsg(e.target.value)}/><br/>
         <div class="btn-send" onClick={sendNewMsg}>send</div>
 
         <h2>Messages</h2>
         <div id="rec-msgs">
-        <ul>
-            
-           {acs[0].map((item, index) => (
-                    <li key={item}  class="account">{item}  :<br/> <ul>
+       
+
+
+{acs[0].map((item, index) => (
+                    <div key={item}  class="account" onClick={()=>expand(item)}>{item} 
                           
-                            {acs[1][item].map((ms, ii) => (
-                    <li key={ii}>{ms}</li>
+                    
+                       </div>
                 ))}
+    
+         
 
-                        </ul></li>
-                ))}
-        </ul>
-        {acs[0].map((ac,i)=>(
-        
-        
-        <div class="accordion-item p-3  border-primary bg-dark"> 
-        <h2 class="accordion-header" id="flush-heading' + ac + '">
-        <button id="' + ac + '"class="accordion-button collapsed" type="button" onclick={addMessages(this)} data-bs-toggle="collapse" data-bs-target="#flush-collapse' + ac + '" aria-expanded="false" aria-controls="flush-collapse' + ac + '">
-        {ac} 
-        </button>
-        </h2>
-        <div id="flush-collapse' + ac + '" class="accordion-collapse collapse" aria-labelledby="flush-heading' + ac + '" data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body" id="messagepart' + ac + '">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first items accordion body.</div>
-        </div>
-        </div>
-            
-            
-            ))}
-        
+      
+    </div>
+    </div>
 
-        
+
+    <div class="chat-window">
+      
+    {chatDisp===""?"Select Chat":<ChatWindow parameter={chatDisp}/>}
+     </div> 
+
+     
         </div>
-    </div>);
+        </div>
+    );
 }

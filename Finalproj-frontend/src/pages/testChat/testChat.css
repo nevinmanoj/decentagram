@@ -1,4 +1,4 @@
-.btn-send{
+/* .btn-send{
     background-color: aqua;
     width:60px;
     margin: 10px 10px;
@@ -10,5 +10,65 @@
     background-color: rgb(39, 200, 200);
 }
 .account{
+ 
+  background-color: #9DC08B;
+  width: 420px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+.account:hover{
+    background-color: #83a274;
+    cursor: pointer;
+    
+}
+.snd{
+    background-color: aquamarine;
+    text-align: end;
+    align-items: end;
+    padding-right:10px;
+   
+   
+}
+.rec{
+    background-color: aquamarine;
+    padding-left:10px;
+    
+   
+}
+.sendmsg{
+    display:flex;
 
+
+}
+
+.chat-outer{
+   display: flex;
+   height: 100%;
+ 
+    
+}
+.chat-window{
+   flex:1;
+   background-color: bisque;
+   
+   
+}
+ */
+
+ .chat-outer{
+    display : flex;
+flex-direction: row;
+height: 100vh;
+width: 100%;
+ }
+.account{
+    display: flex;
+    flex-direction : row;
+    border-bottom: 1px solid #f2f2f2;
+    background: #9DC08B;
+    cursor: pointer;
+    padding: 15px 12px;
 }
