@@ -7,7 +7,8 @@ export default function ChatWindow(props){
     const { parameter  } = props;
     
     
-  const [msg, setmsg] = useState([]);
+  const [msg, setmsg] = useState("");
+  const [msglist, setmsglist] = useState([]);
   
   let web3 = new Web3(window.ethereum)
   let chatcontract = new web3.eth.Contract(chatcontractABI, chatcontractAddress);
@@ -46,7 +47,7 @@ export default function ChatWindow(props){
                 }
             }
            
-             setmsg(msgs);
+             setmsglist(msgs);
           
           });
     }, [parameter]);
@@ -79,7 +80,7 @@ export default function ChatWindow(props){
     
                     
         <div class="messages">
-             {msg.map((ms,i)=>(<div class={ms[1]+"div"}><div class={ms[1]}>{ms[0]} <br /></div></div>))}
+             {msglist.map((ms,i)=>(<div class={ms[1]+"div"}><div class={ms[1]}>{ms[0]} <br /></div></div>))}
         </div>
 
 
