@@ -24,8 +24,8 @@ export default function ChatWindow(props){
             toBlock: 'latest',
     
           },function (err, data) {
-              var msgs=[["test","rec"],["test","rec"],["test","rec"],["test","snd"],["test","rec"],["test","snd"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"]];
-            // var msgs=[];
+            //   var msgs=[["test","rec"],["test","rec"],["test","rec"],["test","snd"],["test","rec"],["test","snd"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"]];
+           var msgs=[];
         
             let x = data.length;
             for (var n = 0; n < x; n++) {
