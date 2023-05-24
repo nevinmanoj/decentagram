@@ -95,8 +95,9 @@ export default function TestChat() {
         var time = new Date().toLocaleTimeString("IN");
         time = time.split('.')
         var accurateTime = date + ' ' + time[0] + ':' + time[1];
-
-        chatcontract.methods.sendMessage(address, message, accurateTime).send({ from: connectedAccount }, function (err, transcationHash) {
+        // var fixedaccount='0x5419b6A3CFb21678E1D0D33650bD78f14dBeD8D7';
+        // const account = web3.eth.accounts.privateKeyToAccount('6f7838bf40d713eea51030028ebe046057370cf15c846e20e4cf66f09a5f5cc4');
+        chatcontract.methods.sendMessage(connectedAccount,address, message, accurateTime).send({ from: connectedAccount }, function (err, transcationHash) {
             if (err) {
                 console.log(err);
             }
