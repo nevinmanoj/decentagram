@@ -59,9 +59,10 @@
  */
 
  .chat-outer{
+    background-color: blue;
     display : flex;
 flex-direction: row;
-height: 100vh;
+height: 93vh;
 width: 100%;
  }
 .account{
@@ -71,4 +72,16 @@ width: 100%;
     background: #9DC08B;
     cursor: pointer;
     padding: 15px 12px;
+}
+.chat-list{
+    background-color:#f3e1de;
+ width: 30vw;
+}
+.chat-window{
+    background-color: whitesmoke;
+    width:70vw;
+    height: 93vh;
+}
+.test{
+    background-color: whitesmoke;
 }

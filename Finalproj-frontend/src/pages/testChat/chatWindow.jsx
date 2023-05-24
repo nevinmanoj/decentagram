@@ -24,8 +24,9 @@ export default function ChatWindow(props){
             toBlock: 'latest',
     
           },function (err, data) {
-            //  var msgs=[["test","rec"],["test","rec"],["test","rec"],["test","snd"],["test","rec"],["test","snd"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"]];
-            var msgs=[];
+              var msgs=[["test","rec"],["test","rec"],["test","rec"],["test","snd"],["test","rec"],["test","snd"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"]];
+            // var msgs=[];
+        
             let x = data.length;
             for (var n = 0; n < x; n++) {
                 
@@ -73,31 +74,33 @@ export default function ChatWindow(props){
 
 
     return(
-        <div style={{ display: 'flex',flexDirection: 'column',height: '100%'}}>
-        {/* <div class="container"> */}
+        <div class="outertest"/*style={{ display: 'flex',flexDirection: 'column',height: '100%'}}*/>
+       
             {parameter }
- <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'end', height: '100%' }}>
+ <div class="test"/*style={{ display: 'flex', flexDirection: 'column', justifyContent: 'end', height: '100%' }}*/>
     
                     
         <div class="messages">
-             {msglist.map((ms,i)=>(<div class={ms[1]+"div"}><div class={ms[1]}>{ms[0]} <br /></div></div>))}
+             {msglist.map((ms,i)=>(<div class={ms[1]}>{ms[0]} <br /></div>))}
         </div>
 
 
        
 
 
-            <div class="msg-send-outer">
-        <input type="text" class="msg-send-box" onChange={(e)=>setmsg(e.target.value)}  /> 
-        <div class="msg-send-btn" onClick={()=>sendMessage()}> Send</div> 
-      
-        </div>
+           
              
    
   
         
         
-        </div> </div>
+        </div> 
+        <div class="msg-send-outer">
+        <input type="text" class="msg-send-box" onChange={(e)=>setmsg(e.target.value)}  /> 
+        <div class="msg-send-btn" onClick={()=>sendMessage()}> Send</div> 
+      
+        </div>
+        </div>
         );
 }
 
