@@ -2,13 +2,14 @@
 // import { blue } from "@material-ui/core/colors";
 import React, { useState,useContext } from "react";
 
+
 import { useNavigate } from "react-router-dom";
 import SocialNetwork from '../../img/SocialNetwork.png';
 
 import "./register.css"
 import { testContext } from "../../context/testContext";
 function SignupPage() {
-
+  
   const navigate = useNavigate();
   const {connectWallet,connectedAccount,formData,handleChange,createUser}=  useContext(testContext);
 

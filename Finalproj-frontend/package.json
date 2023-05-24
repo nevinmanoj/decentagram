@@ -15,6 +15,7 @@
     "chai": "^4.3.7",
     "ethereum-waffle": "^3.0.0",
     "ethers": "^5.0.0",
+    "firebase": "^9.22.0",
     "hardhat": "^2.13.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

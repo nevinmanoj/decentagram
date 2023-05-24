@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React,{useEffect, useState} from 'react';
 import { ethers } from 'ethers';
-
+import {
+    getFirestore, collection, doc, setDoc
+  } from 'firebase/firestore';
 import {contractABI,contractAddress} from '../utils/constants';
 import AuthenticationHash from '../utils/authenticateHash';
 import web3Connection from '../web3Connection';
@@ -111,6 +113,18 @@ export const TestProvider=({children})=>{
            
         const userCount=await testContract.getUserCount();  
         console.log("userCount:"+userCount);  
+        const db = getFirestore();
+
+        // collection ref
+        const colRef = collection(db, 'users');
+        const docData = {
+            email: username,
+            name:name,
+            address:connectedAccount
+                 
+        };
+        await setDoc(doc(db, "users", connectedAccount), docData);
+
             // setuserCount(userCount.toNumber);
         } catch (error) {
             console.log(error);
