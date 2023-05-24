@@ -39,34 +39,34 @@ export default function TestChat() {
             for (var n = 0; n < x; n++) {
                
                 if(data[n].returnValues.from.toLowerCase()===connectedAccount){
-                  if(!myMap[data[n].returnValues.to]){
-                    myMap[data[n].returnValues.to]=true;
+                  if(!myMap[data[n].returnValues.to.toLowerCase()]){
+                    myMap[data[n].returnValues.to.toLowerCase()]=true;
                
-                    accounts.push(data[n].returnValues.to);
+                    accounts.push(data[n].returnValues.to.toLowerCase());
                     
-                    msgs[data[n].returnValues.to]=[[]];
+                    msgs[data[n].returnValues.to.toLowerCase()]=[[]];
                     
                   }
                  
-                  msgs[data[n].returnValues.to].push([data[n].returnValues.message,"snd"]);
+                  msgs[data[n].returnValues.to.toLowerCase()].push([data[n].returnValues.message,"snd"]);
                 }
               
                 if((data[n].returnValues.to.toLowerCase()===connectedAccount)){
                 
                    
-              if(!myMap[data[n].returnValues.from]){
+              if(!myMap[data[n].returnValues.from.toLowerCase()]){
                 
-                myMap[data[n].returnValues.from]=true;
+                myMap[data[n].returnValues.from.toLowerCase()]=true;
                
-                    accounts.push(data[n].returnValues.from);
+                    accounts.push(data[n].returnValues.from.toLowerCase());
                    
-                    msgs[data[n].returnValues.from]=[[]];
+                    msgs[data[n].returnValues.from.toLowerCase()]=[[]];
                 
                    
                 
               }
               
-              msgs[data[n].returnValues.from].push([data[n].returnValues.message,"rec"]);
+              msgs[data[n].returnValues.from.toLowerCase()].push([data[n].returnValues.message,"rec"]);
             }
             }
     

@@ -62,7 +62,7 @@ export default function ChatWindow(props){
     time = time.split('.')
     var accurateTime = date + ' ' + time[0] + ':' + time[1];
     
-    chatcontract.methods.sendMessage(address, message, accurateTime).send({ from: connectedAccount }, function (err, transcationHash) {
+    chatcontract.methods.sendMessage(connectedAccount,address, message, accurateTime).send({ from: connectedAccount }, function (err, transcationHash) {
         if (err) {
             console.log(err);
         }
