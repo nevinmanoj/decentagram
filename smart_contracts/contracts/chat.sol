@@ -4,9 +4,9 @@ pragma solidity ^0.8.9;
 
 contract chat{
 event message(address indexed from ,string message ,address to,string timestamp);
-function sendMessage(address _to,string memory _message,string memory time) public {
+function sendMessage(address _from,address _to,string memory _message,string memory time) public {
 
-    emit message(msg.sender,_message,_to,time);
+    emit message(_from,_message,_to,time);
 }
     
 }
