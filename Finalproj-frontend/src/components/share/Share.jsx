@@ -6,9 +6,18 @@ import { useState,useContext } from "react";
 import {  getFirestore, collection, doc, setDoc,addDoc} from 'firebase/firestore';
 import { testContext } from "../../context/testContext";
 import { create } from 'ipfs-http-client'
+import { Buffer } from 'buffer'
 
 export default function Share() {
+  const projectId='2QEO5EwQKOiXediYhXDbW2Q5dNn';
+    const projectSecret='f0dca80af13ef4a49d052dbf919e5783';
+    const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+    const ipfs=create({host: 'ipfs.infura.io:5001', port: 5001, protocol: 'https',headers:{
+      authorization:auth
+    },
+    apiPath:"/api/v0"});
   const [selectedFile, setSelectedFile] = useState(null);
+  const [buffer, setbuffer] = useState(null);
   
     const handleFileChange = (event) => {
       setSelectedFile(event.target.files[0]);
@@ -22,7 +31,31 @@ export default function Share() {
   const handleDetailChange = (event) => {
     setDetails(event.target.value);
   };
-  const handleShare = async() => {
+  const handleShare=async()=>{
+      // handleShareFirebase();
+      handleShareIpfs();
+  }
+ const captureFile = (event) => {
+
+    event.preventDefault()
+    const file = event.target.files[0]
+   
+    const reader = new window.FileReader()
+    reader.readAsArrayBuffer(file)
+
+    reader.onloadend = () => {
+      
+      var x=Buffer(reader.result);
+       setbuffer(x);
+      
+      
+    }
+  }
+
+  const handleShareFirebase = async() => {
+    
+
+
      const db = getFirestore();
     var date = new Date().toLocaleDateString("IN");
     var time = new Date().toLocaleTimeString("IN");
@@ -39,6 +72,26 @@ export default function Share() {
 
  
   };
+
+  const handleShareIpfs = async()=>{
+    
+    if(buffer!=null){
+      try{
+        console.log("Submitting file to ipfs...");
+        const cid=await ipfs.add(buffer);
+        console.log(cid);
+        
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+    else{
+      alert("choose file");
+    }
+
+   
+  }
 
   return (
     <div className="share">
@@ -68,7 +121,7 @@ export default function Share() {
               <Room htmlColor="green" className="shareIcon" />
               <span className="shareOptionText">Location</span>
             </div> */}
-            <input type="file" onChange={handleFileChange} />
+            <input type="file" accept=".jpg, .jpeg, .png, .bmp, .gif" onChange={captureFile} />
             {/* <div className="shareOption">
               <EmojiEmotions htmlColor="goldenrod" className="shareIcon" />
               <span className="shareOptionText">Feelings</span>
