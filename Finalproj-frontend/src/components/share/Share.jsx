@@ -5,7 +5,7 @@ import PhotoUpload from "./sharetest";
 import { useState,useContext } from "react";
 import {  getFirestore, collection, doc, setDoc,addDoc} from 'firebase/firestore';
 import { testContext } from "../../context/testContext";
-
+import { create } from 'ipfs-http-client'
 
 export default function Share() {
   const [selectedFile, setSelectedFile] = useState(null);
