@@ -22,6 +22,11 @@ export default function TestChat() {
   let {
     connectedAccount
   } = useContext(testContext);
+
+  let {
+    curUserName
+  } = useContext(testContext);
+
   var accounts = [];
   var accountnames = [];
   var myMap = {};
@@ -146,7 +151,8 @@ export default function TestChat() {
     <div class="chat-outer">
 
       <div class="chat-list" >
-        <h6>Current Ac: <br />{connectedAccount}</h6>
+        <h6>Current A/c: <br />{connectedAccount}</h6>
+        {/* {console.log(connectedAccount)} */}
         <input type="text" placeholder="address" id="address-send" onChange={(e) => setaddr(e.target.value)} /><br />
         <input type="text" placeholder="message" id="msg-send" onChange={(e) => setmsg(e.target.value)} /><br />
         <div class="btn-send" onClick={sendNewMsg}><span className="text-class">Send</span></div>
@@ -157,10 +163,14 @@ export default function TestChat() {
 
 
           {acs[0].map((item, index) => (
-            <div key={item} class="account" onClick={() => expand(acs[0][index], acs[2][index])}>{acs[2][index]}
 
 
+
+            <div key={item} class="account" onClick={() => expand(acs[0][index], acs[2][index])}>{acs[2][index].split("@")[0]}
             </div>
+
+
+
           ))}
 
 
@@ -177,6 +187,6 @@ export default function TestChat() {
 
 
     </div>
-  </div>
+  </div >
   );
 }
