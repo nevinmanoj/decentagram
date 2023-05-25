@@ -58,30 +58,53 @@
 }
  */
 
- .chat-outer{
+.text-class {
+    margin-left: 0.75rem;
+}
+
+.btn-send {
+    background-color: #ffff;
+    width: 60px;
+    margin: 10px 10px;
+    align-items: center;
+    border-radius: 10px;
+
+
+}
+
+.btn-send:hover {
+    background-color: #cfd1d4;
+    cursor: pointer;
+}
+
+.chat-outer {
     background-color: blue;
-    display : flex;
-flex-direction: row;
-height: 93vh;
-width: 100%;
- }
-.account{
     display: flex;
-    flex-direction : row;
+    flex-direction: row;
+    height: 93vh;
+    width: 100%;
+}
+
+.account {
+    display: flex;
+    flex-direction: row;
     border-bottom: 1px solid #f2f2f2;
     background: #9DC08B;
     cursor: pointer;
     padding: 15px 12px;
 }
-.chat-list{
-    background-color:#f3e1de;
- width: 30vw;
+
+.chat-list {
+    background-color: #f3e1de;
+    width: 30vw;
 }
-.chat-window{
+
+.chat-window {
     background-color: whitesmoke;
-    width:70vw;
+    width: 70vw;
     height: 93vh;
 }
-.test{
+
+.test {
     background-color: whitesmoke;
 }
