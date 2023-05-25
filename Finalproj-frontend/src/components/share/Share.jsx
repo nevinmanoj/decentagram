@@ -16,12 +16,12 @@ export default function Share() {
       authorization:auth
     },
     apiPath:"/api/v0"});
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
   const [buffer, setbuffer] = useState(null);
   
-    const handleFileChange = (event) => {
-      setSelectedFile(event.target.files[0]);
-    };
+    // const handleFileChange = (event) => {
+    //   setSelectedFile(event.target.files[0]);
+    // };
     let {
       connectedAccount
     } =  useContext(testContext);
@@ -52,20 +52,17 @@ export default function Share() {
     }
   }
 
-  const handleShareFirebase = async() => {
+  const handleShareFirebase = async(cid) => {
     
 
 
-     const db = getFirestore();
+    const db = getFirestore();
     var date = new Date().toLocaleDateString("IN");
     var time = new Date().toLocaleTimeString("IN");
-
-
-    
-  var path= "users/"+connectedAccount+"/post";
-  const docRef = await addDoc(collection(db, path), {
+    var path= "users/"+connectedAccount+"/post";
+    const docRef = await addDoc(collection(db, path), {
       details: details,
-      media:"to be conti",
+      ipfs:cid.path,
       date:date,
       time:time
   });
@@ -80,6 +77,19 @@ export default function Share() {
         console.log("Submitting file to ipfs...");
         const cid=await ipfs.add(buffer);
         console.log(cid);
+
+        
+        handleShareFirebase(cid);
+      //   const db = getFirestore();
+      //   var date = new Date().toLocaleDateString("IN");
+      //   var time = new Date().toLocaleTimeString("IN");
+      //   var path= "users/"+connectedAccount+"/post";
+      //   const docRef = await addDoc(collection(db, path), {
+      //     details: details,
+      //     ipfs:cid.path,
+      //     date:date,
+      //     time:time
+      // });
         
       }
       catch(err){
