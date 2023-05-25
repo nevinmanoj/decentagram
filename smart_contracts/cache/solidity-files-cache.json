@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "D:\\dev\\react\\finalProj\\smart_contracts\\contracts\\test.sol": {
-      "lastModificationDate": 1681635359095,
-      "contentHash": "af57855a3d5ff7c015bd32dc86d8ea93",
+      "lastModificationDate": 1684997562459,
+      "contentHash": "cd1f4c931d067ff9040f0f1b8c883738",
       "sourceName": "contracts/test.sol",
       "solcConfig": {
         "version": "0.8.18",

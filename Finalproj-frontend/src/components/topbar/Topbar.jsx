@@ -6,6 +6,8 @@ import {
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import DropDown from "../dropdown/dropdown";
+import { getEthereumContract } from "../../context/testContext";
+
 
 export default function Topbar() {
 
@@ -39,6 +41,13 @@ export default function Topbar() {
             <span className="topbarIconBadge">2</span>
           </div>
           <div className="topbarIconItem" onClick={async() => { 
+            var x=prompt("enter adress");
+            if(x!=null)
+            {var contract=await getEthereumContract();
+            var name=await contract.getUserName(x);
+            alert(name);}
+            
+
           }}>
             <Notifications />
             <span className="topbarIconBadge">1</span>

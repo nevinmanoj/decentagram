@@ -44,7 +44,7 @@ function getSignatureHash() public view returns (string memory) {
 function getUserAddress() public view returns (address) {
         return user[msg.sender].useraddress;
 }
-function getUserName() public view returns (string memory) {
-        return user[msg.sender].username;
+function getUserName(address addr) public view returns (string memory) {
+        return user[addr].username;
 }
 }
