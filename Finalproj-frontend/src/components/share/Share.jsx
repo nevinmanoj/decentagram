@@ -2,108 +2,114 @@ import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
 // import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import PhotoUpload from "./sharetest";
-import { useState,useContext } from "react";
-import {  getFirestore, collection, doc, setDoc,addDoc} from 'firebase/firestore';
+import { useState, useContext } from "react";
+import { getFirestore, collection, doc, setDoc, addDoc } from 'firebase/firestore';
 import { testContext } from "../../context/testContext";
 import { create } from 'ipfs-http-client'
 import { Buffer } from 'buffer'
 
 export default function Share() {
-  const projectId='2QEO5EwQKOiXediYhXDbW2Q5dNn';
-    const projectSecret='f0dca80af13ef4a49d052dbf919e5783';
-    const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
-    const ipfs=create({host: 'ipfs.infura.io:5001', port: 5001, protocol: 'https',headers:{
-      authorization:auth
+  const projectId = '2QEO5EwQKOiXediYhXDbW2Q5dNn';
+  const projectSecret = 'f0dca80af13ef4a49d052dbf919e5783';
+  const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+  const ipfs = create({
+    host: 'ipfs.infura.io:5001', port: 5001, protocol: 'https', headers: {
+      authorization: auth
     },
-    apiPath:"/api/v0"});
+    apiPath: "/api/v0"
+  });
   // const [selectedFile, setSelectedFile] = useState(null);
   const [buffer, setbuffer] = useState(null);
-  
-    // const handleFileChange = (event) => {
-    //   setSelectedFile(event.target.files[0]);
-    // };
-    let {
-      connectedAccount
-    } =  useContext(testContext);
+
+  // const handleFileChange = (event) => {
+  //   setSelectedFile(event.target.files[0]);
+  // };
+  let {
+    connectedAccount, getUserName
+  } = useContext(testContext);
 
 
   const [details, setDetails] = useState("");
   const handleDetailChange = (event) => {
     setDetails(event.target.value);
   };
-  const handleShare=async()=>{
-      // handleShareFirebase();
-      handleShareIpfs();
+  const handleShare = async () => {
+    // handleShareFirebase();
+    handleShareIpfs();
   }
- const captureFile = (event) => {
+  const captureFile = (event) => {
 
     event.preventDefault()
     const file = event.target.files[0]
-   
+
     const reader = new window.FileReader()
     reader.readAsArrayBuffer(file)
 
     reader.onloadend = () => {
-      
-      var x=Buffer(reader.result);
-       setbuffer(x);
-      
-      
+
+      var x = Buffer(reader.result);
+      setbuffer(x);
+
+
     }
   }
 
-  const handleShareFirebase = async(cid) => {
-    
+  const handleShareFirebase = async (cid) => {
+
 
 
     const db = getFirestore();
     var date = new Date().toLocaleDateString("IN");
     var time = new Date().toLocaleTimeString("IN");
-    var path= "users/"+connectedAccount+"/post";
+    var path = "users/" + connectedAccount + "/post";
+    var name = await getUserName();
     const docRef = await addDoc(collection(db, path), {
       details: details,
-      ipfs:cid.path,
-      date:date,
-      time:time
-  });
+      ipfs: cid.path,
+      date: date,
+      time: time,
+      username: name,
+      author: connectedAccount,
+    });
 
- 
+
   };
 
-  const addToPostDb= async(cid)=>{
+  const addToPostDb = async (cid) => {
     const db = getFirestore();
     var date = new Date().toLocaleDateString("IN");
     var time = new Date().toLocaleTimeString("IN");
-    
+    var name = await getUserName();
     const docRef = await addDoc(collection(db, "posts"), {
       details: details,
-      ipfs:cid.path,
-      date:date,
-      time:time,
-      author:connectedAccount
-  });
+      ipfs: cid.path,
+      date: date,
+      time: time,
+      author: connectedAccount,
+      username: name
+    });
   };
 
-  const handleShareIpfs = async()=>{
-    
-    if(buffer!=null){
-      try{
+  const handleShareIpfs = async () => {
+
+    if (buffer != null) {
+      try {
         console.log("Submitting file to ipfs...");
-        const cid=await ipfs.add(buffer);
+        const cid = await ipfs.add(buffer);
         console.log(cid);
         handleShareFirebase(cid);
         addToPostDb(cid);
-        
+
       }
-      catch(err){
+      catch (err) {
         console.log(err);
       }
     }
-    else{
+    else {
       alert("choose file");
     }
 
-   
+
   }
 
   return (
@@ -152,4 +158,4 @@ export default function Share() {
 
 
 
- 
+
