@@ -70,6 +70,7 @@ export default function Share() {
       time: time,
       username: name,
       author: connectedAccount,
+      like:[]
     });
 
 
@@ -86,7 +87,8 @@ export default function Share() {
       date: date,
       time: time,
       author: connectedAccount,
-      username: name
+      username: name,
+      like:[]
     });
   };
 

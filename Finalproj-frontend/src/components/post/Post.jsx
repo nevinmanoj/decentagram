@@ -1,15 +1,40 @@
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import { Users } from "../../dummyData";
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import { testContext } from "../../context/testContext";
 
-export default function Post({ post }) {
-  const [like, setLike] = useState(23)
-  const [isLiked, setIsLiked] = useState(false)
+import { getFirestore,updateDoc, arrayUnion, arrayRemove,doc} from 'firebase/firestore';
 
-  const likeHandler = () => {
-    setLike(isLiked ? like - 1 : like + 1)
-    setIsLiked(!isLiked)
+export default function Post({ post,id }) {
+const {connectedAccount}=useContext(testContext);
+   const [like, setLike] = useState(post['like'].length)
+   const [isLiked, setIsLiked] = useState(post['like'].includes(connectedAccount));
+     
+  const likeHandler = async() => {
+     const db = getFirestore();
+     const ref = doc(db, "posts", id);
+
+
+    
+   if(isLiked){
+    //unliking
+
+    await updateDoc(ref, {
+      like: arrayRemove(connectedAccount)
+  });
+  
+  
+   }
+   else{
+    // liking
+    await updateDoc(ref, {
+      like: arrayUnion(connectedAccount)
+  });
+ 
+   }
+   setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
   }
   return (
     <div className="post">
@@ -54,3 +79,4 @@ export default function Post({ post }) {
     </div>
   );
 }
+// post['like'].includes(connectedAccount)
