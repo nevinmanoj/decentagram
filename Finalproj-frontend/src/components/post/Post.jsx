@@ -1,7 +1,7 @@
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
-import { Users } from "../../dummyData";
-import { useContext, useState, useEffect } from "react";
+
+import { useContext, useState} from "react";
 import { testContext } from "../../context/testContext";
 
 import { getFirestore,updateDoc, arrayUnion, arrayRemove,doc} from 'firebase/firestore';
@@ -69,7 +69,9 @@ const {connectedAccount}=useContext(testContext);
           <div className="postBottomLeft">
             <img className="likeIcon" src="assets/like.png" onClick={likeHandler} alt="" />
             <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" />
-            <span className="postLikeCounter">{like} people like it</span>
+            {isLiked?<span className="postLikeCounter">You and {like-1} people like it</span>: <span className="postLikeCounter">{like} people like it</span>}
+            
+           
           </div>
           {/* <div className="postBottomRight">
             <span className="postCommentText">{"post.comment"} comments</span>
