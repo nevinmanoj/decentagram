@@ -70,6 +70,20 @@ export default function Share() {
  
   };
 
+  const addToPostDb= async(cid)=>{
+    const db = getFirestore();
+    var date = new Date().toLocaleDateString("IN");
+    var time = new Date().toLocaleTimeString("IN");
+    
+    const docRef = await addDoc(collection(db, "posts"), {
+      details: details,
+      ipfs:cid.path,
+      date:date,
+      time:time,
+      author:connectedAccount
+  });
+  };
+
   const handleShareIpfs = async()=>{
     
     if(buffer!=null){
@@ -78,18 +92,9 @@ export default function Share() {
         const cid=await ipfs.add(buffer);
         console.log(cid);
 
-        
+
         handleShareFirebase(cid);
-      //   const db = getFirestore();
-      //   var date = new Date().toLocaleDateString("IN");
-      //   var time = new Date().toLocaleTimeString("IN");
-      //   var path= "users/"+connectedAccount+"/post";
-      //   const docRef = await addDoc(collection(db, path), {
-      //     details: details,
-      //     ipfs:cid.path,
-      //     date:date,
-      //     time:time
-      // });
+        addToPostDb(cid);
         
       }
       catch(err){
