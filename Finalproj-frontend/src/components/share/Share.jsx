@@ -91,8 +91,6 @@ export default function Share() {
         console.log("Submitting file to ipfs...");
         const cid=await ipfs.add(buffer);
         console.log(cid);
-
-
         handleShareFirebase(cid);
         addToPostDb(cid);
         
