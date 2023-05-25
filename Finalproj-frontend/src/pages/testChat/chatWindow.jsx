@@ -76,7 +76,7 @@ export default function ChatWindow(props) {
     return (
         <div class="outertest"/*style={{ display: 'flex',flexDirection: 'column',height: '100%'}}*/>
 
-            {parameter[1]}
+            {parameter[1].split("@")[0]}
             <div class="test"/*style={{ display: 'flex', flexDirection: 'column', justifyContent: 'end', height: '100%' }}*/>
 
 
@@ -85,13 +85,10 @@ export default function ChatWindow(props) {
                 </div>
 
 
-
-
-
             </div>
             <div class="msg-send-outer">
                 <input type="text" class="msg-send-box" onChange={(e) => setmsg(e.target.value)} />
-                <div class="msg-send-btn" onClick={() => sendMessage()}> Send</div>
+                <div class="msg-send-btn" onClick={() => sendMessage()}>Send</div>
 
             </div>
         </div>
