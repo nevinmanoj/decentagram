@@ -7,7 +7,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-import {TestProvider} from './context/testContext';
+
+
+import { TestProvider } from './context/testContext';
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyC5saHPjZcQj9-xUtJOKBGtlK96Daq4ubY",
@@ -21,11 +23,11 @@ const firebaseConfig = {
 ReactDOM.render(
   <React.StrictMode>
     <TestProvider>
-    <BrowserRouter>
-      <App />
-      {/* <Apptest /> */}
-      {/* <DropDown /> */}
-    </BrowserRouter>
+      <BrowserRouter>
+        <App />
+        {/* <Apptest /> */}
+        {/* <DropDown /> */}
+      </BrowserRouter>
     </TestProvider>
   </React.StrictMode>,
   document.getElementById('root')
