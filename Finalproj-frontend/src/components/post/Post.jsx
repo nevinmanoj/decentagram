@@ -64,7 +64,7 @@ export default function Post({ post, id }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post['details']}</span>
-          <img className="postImg" src={"https://ipfs.io/ipfs/" + post["ipfs"]} alt="" />
+          <img className="postImg" src={"https://ipfs.io/ipfs/" + post["ipfs"]} alt="Loading" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
