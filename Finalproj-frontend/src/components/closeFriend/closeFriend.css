@@ -1,13 +1,30 @@
 .sidebarFriend {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .sidebarFriendImg {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-  }
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+  background-color: #ebf0ec;
+  border-radius: 10px;
+  height: 3rem;
+}
+
+.sidebarFriendImg {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.sidebarFriendName {
+  margin-left: 3rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  background-color: #ebf0ec;
+
+}
+
+.sidebarAddress {
+  font-size: 12px;
+  margin-left: 2rem;
+}

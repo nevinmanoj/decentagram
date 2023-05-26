@@ -40,22 +40,13 @@ export default function Topbar() {
             <Chat />
             <span className="topbarIconBadge">2</span>
           </div>
-          <div className="topbarIconItem" onClick={async() => { 
-            var x=prompt("enter adress");
-            if(x!=null)
-            {var contract=await getEthereumContract();
-            var name=await contract.getUserName(x);
-            alert(name);}
-            
-
-          }}>
+          <div className="topbarIconItem">
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
         {/* <img src="/assets/person/1.jpeg" alt="" className="topbarImg" onClick={() => { <DropDown /> }} /> */}
         <DropDown />
-
 
       </div>
     </div>
