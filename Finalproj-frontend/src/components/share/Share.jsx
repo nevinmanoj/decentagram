@@ -63,6 +63,7 @@ export default function Share() {
     var time = new Date().toLocaleTimeString("IN");
     var path = "users/" + connectedAccount + "/post";
     var name = await getUserName();
+    
     const docRef = await addDoc(collection(db, path), {
       details: details,
       ipfs: cid.path,
@@ -75,7 +76,7 @@ export default function Share() {
 
 
   };
-
+ 
   const addToPostDb = async (cid) => {
     const db = getFirestore();
     var date = new Date().toLocaleDateString("IN");
@@ -88,18 +89,23 @@ export default function Share() {
       time: time,
       author: connectedAccount,
       username: name,
-      like:[]
+      like:[],
     });
   };
 
   const handleShareIpfs = async () => {
+    var name = await getUserName();
+    if(name==null||connectedAccount==null){
+      alert("pls login again");
+      return
+    }
 
     if (buffer != null) {
       try {
         console.log("Submitting file to ipfs...");
         const cid = await ipfs.add(buffer);
         console.log(cid);
-        handleShareFirebase(cid);
+        // handleShareFirebase(cid);
         addToPostDb(cid);
 
       }
