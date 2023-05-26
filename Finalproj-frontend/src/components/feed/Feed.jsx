@@ -15,16 +15,16 @@ export default function Feed() {
   const [data, setData] = useState([[], []]);
 
   const { getUserName } = useContext(testContext);
-  useEffect( () => {
-    
-     async function getData(){
+  useEffect(() => {
+
+    async function getData() {
       const db = getFirestore();
       // var username = await getUserName();
       // console.log(username);
-  
+
       var keys = [];
       var posts = [];
-  
+
       const querySnapshot = await getDocs(collection(db, "posts"));
       querySnapshot.forEach((doc) => {
         keys.push(doc.id);
@@ -32,10 +32,10 @@ export default function Feed() {
         console.log(doc.id, " => ", doc.data());
       });
       setData([keys, posts]);
-  
-     }
-     getData();
-   
+
+    }
+    getData();
+
 
   }, [])
 
@@ -51,9 +51,6 @@ export default function Feed() {
         {data[0].map((id, index) => (
           <Post key={id} post={data[1][index]} id={id} />
         ))}
-
-
-
 
 
       </div>
