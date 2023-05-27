@@ -45,8 +45,8 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
-        {/* <img src="/assets/person/1.jpeg" alt="" className="topbarImg" onClick={() => { <DropDown /> }} /> */}
-        <DropDown />
+        {/* <img src="/assets/person/1.jpeg" alt="" className="topbarImg" onClick={() => { <DropDown /> }} />
+        <DropDown /> */}
 
       </div>
     </div>

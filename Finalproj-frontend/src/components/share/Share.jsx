@@ -1,7 +1,6 @@
 import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
-// import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import PhotoUpload from "./sharetest";
+
 import { useState, useContext } from "react";
 import { getFirestore, collection, doc, setDoc, addDoc } from 'firebase/firestore';
 import { testContext } from "../../context/testContext";
@@ -91,6 +90,7 @@ export default function Share() {
       username: name,
       like:[],
     });
+    console.log("added to cloud. Ref: "+docRef)
   };
 
   const handleShareIpfs = async () => {
