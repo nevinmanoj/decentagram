@@ -20,7 +20,7 @@ function LoginPage() {
     setisLoggedIn,
     setloginData,
     getUserName,
-    curUserName
+    curUserName,
   } =  useContext(testContext);
  
   useEffect(() => {
@@ -33,9 +33,9 @@ function LoginPage() {
     window.ethereum.on('accountsChanged', handleAccountsChanged);
 
     // Clean up the event listener on component unmount
-    return () => {
-      window.ethereum.off('accountsChanged', handleAccountsChanged);
-    };
+    // return () => {
+    //   window.ethereum.off('accountsChanged', handleAccountsChanged);
+    // };
   }, []);
   const handleLoginFormSubmit = async(event) => {
     const {username,password}=loginData;

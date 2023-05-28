@@ -29,7 +29,7 @@ export default function Feed() {
       querySnapshot.forEach((doc) => {
         keys.push(doc.id);
         posts.push(doc.data());
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
       });
       setData([keys, posts]);
 
@@ -40,7 +40,7 @@ export default function Feed() {
   }, [])
 
 
-  console.log(data[1]);
+
 
 
 

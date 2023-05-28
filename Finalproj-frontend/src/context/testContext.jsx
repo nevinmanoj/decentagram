@@ -120,7 +120,8 @@ export const TestProvider = ({ children }) => {
             const docData = {
                 email: username,
                 name: name,
-                address: connectedAccount
+                address: connectedAccount,
+                profilepic:""
 
             };
             await setDoc(doc(db, "users", connectedAccount), docData);
@@ -150,6 +151,7 @@ export const TestProvider = ({ children }) => {
             setloginData,
             curUserName,
             getUserName,
+            setconnectedAccount,
 
         }}>
         {children}

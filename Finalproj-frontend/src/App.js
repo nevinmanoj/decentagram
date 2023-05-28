@@ -8,23 +8,29 @@ import PersonalProfile from "./pages/personalProfile/PersonalProfile";
 import LoginPage from "./pages/login/LoginPage";
 import SignupPage from "./pages/register/Register";
 import TestChat from "./pages/testChat/testChat";
-
+import { testContext } from "./context/testContext";
+import { useContext } from "react";
 
 export default function App() {
+  const {connectedAccount}=useContext(testContext);
+
   return (
 
     <div>
-
-
-      <Routes>
+      {(connectedAccount===""||connectedAccount==null)? <Routes>
+        <Route path="/" element={<LoginPage />} />
+       </Routes>:<Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/" exact element={<Profile />} />
         <Route path="/chat" element={<Chat />} />
-        {/* <Route path="/chat" element={<NewChat />} /> */}
         <Route path="/profile" element={<PersonalProfile />} />
-        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignupPage />} />
         <Route path="/testChat" element={<TestChat />} />
-      </Routes>
+      </Routes>}
+     
+
+
+      
 
 
     </div>

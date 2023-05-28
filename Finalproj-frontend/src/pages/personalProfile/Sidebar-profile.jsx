@@ -5,6 +5,7 @@ import CloseFriend from "./CloseFriend-profile";
 
 import { useNavigate } from "react-router-dom";
 
+
 export default function Sidebar() {
 
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function Sidebar() {
           </li>
 
         </ul>
-        <button className="sidebarButton" onClick={() => { navigate('/login') }}>LogOut</button>
+        <button className="sidebarButton" onClick={() => { navigate('/login');}}>LogOut</button>
         <hr className="sidebarHr" />
         {/* <ul className="sidebarFriendList">
           {Users.map((u) => (

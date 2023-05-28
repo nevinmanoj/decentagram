@@ -103,7 +103,6 @@ export default function Rightbar({ profile }) {
     });
   }, [connectedAccount]);
 
-  console.log((acs[0]));
   const ProfileRightbar = () => {
 
     const navigate = useNavigate();
