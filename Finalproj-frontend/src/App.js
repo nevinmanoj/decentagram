@@ -10,6 +10,7 @@ import SignupPage from "./pages/register/Register";
 import TestChat from "./pages/testChat/testChat";
 import { testContext } from "./context/testContext";
 import { useContext } from "react";
+import Friends from "./pages/friends/friends";
 
 export default function App() {
   const {connectedAccount}=useContext(testContext);
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/profile" element={<PersonalProfile />} />
         <Route path="/register" element={<SignupPage />} />
         <Route path="/testChat" element={<TestChat />} />
+        <Route path="/friends" element={<Friends />} />
       </Routes>}
      
 

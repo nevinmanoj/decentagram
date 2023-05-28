@@ -32,7 +32,7 @@ export default function Topbar() {
           <span className="topbarLink" onClick={() => { navigate('/profile') }}>Profile</span>
         </div>
         <div className="topbarIcons">
-          <div className="topbarIconItem">
+          <div className="topbarIconItem"  onClick={() => { navigate('/friends') }}>
             <Person />
             <span className="topbarIconBadge">1</span>
           </div>
