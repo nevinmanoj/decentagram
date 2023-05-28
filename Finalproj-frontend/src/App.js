@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Profile from "./pages/profile/Profile";
-import NewChat from "./pages/chat/newChat";
+
 import Chat from "./pages/chat/chat";
 import PersonalProfile from "./pages/personalProfile/PersonalProfile";
 import LoginPage from "./pages/login/LoginPage";
