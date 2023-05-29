@@ -1,13 +1,18 @@
 import "./share.css";
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons";
 
-import { useState, useContext } from "react";
-import { getFirestore, collection, doc, setDoc, addDoc } from 'firebase/firestore';
+import { useState, useContext,useEffect } from "react";
+import { getFirestore, collection, doc, getDoc, addDoc } from 'firebase/firestore';
 import { testContext } from "../../context/testContext";
 import { create } from 'ipfs-http-client'
 import { Buffer } from 'buffer'
 
 export default function Share() {
+  
+  
+
+
+
   const projectId = '2QEO5EwQKOiXediYhXDbW2Q5dNn';
   const projectSecret = 'f0dca80af13ef4a49d052dbf919e5783';
   const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
@@ -19,7 +24,7 @@ export default function Share() {
   });
   // const [selectedFile, setSelectedFile] = useState(null);
   const [buffer, setbuffer] = useState(null);
-
+  const [pp, setpp] = useState("");
   // const handleFileChange = (event) => {
   //   setSelectedFile(event.target.files[0]);
   // };
@@ -27,6 +32,19 @@ export default function Share() {
     connectedAccount, getUserName
   } = useContext(testContext);
 
+
+  useEffect(() => {
+    async function getpp(){
+      const db = getFirestore();
+    const docRef = doc(db, "users", connectedAccount);
+    const snapShot=await getDoc(docRef);
+
+
+    setpp(snapShot.data().profilepic);
+    }
+    getpp();
+   
+  }, [connectedAccount])
 
   const [details, setDetails] = useState("");
   const handleDetailChange = (event) => {
@@ -53,33 +71,52 @@ export default function Share() {
     }
   }
 
-  const handleShareFirebase = async (cid) => {
+  // const handleShareFirebase = async (cid) => {
 
 
 
-    const db = getFirestore();
-    var date = new Date().toLocaleDateString("IN");
-    var time = new Date().toLocaleTimeString("IN");
-    var path = "users/" + connectedAccount + "/post";
-    var name = await getUserName();
+  //   const db = getFirestore();
+  //   var date = new Date().toLocaleDateString("IN");
+  //   const currentDate = new Date();
+
+  //         const year = currentDate.getFullYear();
+  //         const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+  //         const day = String(currentDate.getDate()).padStart(2, '0'); 
+  //         const hours = String(currentDate.getHours()).padStart(2, '0');
+  //     const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+  //     const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+  //     const datetime=year+month+day+hours+minutes+seconds;
+  //   var time = new Date().toLocaleTimeString("IN");
+  //   var path = "users/" + connectedAccount + "/post";
+  //   var name = await getUserName();
     
-    const docRef = await addDoc(collection(db, path), {
-      details: details,
-      ipfs: cid.path,
-      date: date,
-      time: time,
-      username: name,
-      author: connectedAccount,
-      like:[]
-    });
+  //   const docRef = await addDoc(collection(db, path), {
+  //     details: details,
+  //     ipfs: cid.path,
+  //     date: date,
+  //     time: time,
+  //     username: name,
+  //     author: connectedAccount,
+  //     like:[],
+  //     datetime:datetime
+  //   });
 
 
-  };
+  // };
  
   const addToPostDb = async (cid) => {
     const db = getFirestore();
     var date = new Date().toLocaleDateString("IN");
     var time = new Date().toLocaleTimeString("IN");
+    const currentDate = new Date();
+
+          const year = currentDate.getFullYear();
+          const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+          const day = String(currentDate.getDate()).padStart(2, '0'); 
+          const hours = String(currentDate.getHours()).padStart(2, '0');
+      const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+      const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+      const datetime=year+month+day+hours+minutes+seconds;
     var name = await getUserName();
     const docRef = await addDoc(collection(db, "posts"), {
       details: details,
@@ -89,6 +126,7 @@ export default function Share() {
       author: connectedAccount,
       username: name,
       like:[],
+      dateTime:datetime
     });
     console.log("added to cloud. Ref: "+docRef)
   };
@@ -124,7 +162,11 @@ export default function Share() {
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img className="shareProfileImg" src="/assets/person/1.jpeg" alt="" />
+          <img className="shareProfileImg" 
+           src={(pp===""||pp==null)?
+           "assets/pp.jpg":
+           "https://ipfs.io/ipfs/"+pp}
+          alt="" />
           <input
             placeholder="What's on your mind ?"
             className="shareInput"
