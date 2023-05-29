@@ -1,0 +1,15 @@
+.outer-req{
+    background-color: coral;
+    width:48vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+.req-item{
+    background-color: cornflowerblue;
+    display: flex;
+    align-items: center;
+}
+.req-details{
+display: block;
+}
+

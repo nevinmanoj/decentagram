@@ -1,1 +1,16 @@
 
+.dash{
+    display: flex;
+    /* flex-direction: row; */
+    background-color: brown;
+    width:100vw
+    
+}
+.main-outer{
+    height: 100vh;
+    background-color: rgb(205, 164, 244);
+}
+
+/* .dashItem{
+    flex:1;
+} */
