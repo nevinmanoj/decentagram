@@ -3,11 +3,36 @@ import {  Person, Chat, Notifications } from "@material-ui/icons";
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-
+import { useContext,useState,useEffect } from "react";
+import { testContext } from "../../context/testContext";
+import {
+  getFirestore, doc,updateDoc, getDoc,onSnapshot
+} from 'firebase/firestore'; 
 
 export default function Topbar() {
-
+const {connectedAccount}=useContext(testContext);
+const [reqCount, setreqCount] = useState(0);
+useEffect(() => {
+  
+  async function getData(){
+    const db = getFirestore();
+    const docRef = doc(db, "users", connectedAccount);
+    
+    const unsubscribe = onSnapshot(docRef, async (docSnap) => {
+     
+        setreqCount(docSnap.data()['requests'].length);
+      });
+        
+    
+  
+ 
+      return () => {
+          unsubscribe();
+      };
+  }
+  getData();
+  
+}, [connectedAccount]);
   const navigate = useNavigate();
   return (
     <div className="topbarContainer">
@@ -31,7 +56,7 @@ export default function Topbar() {
         <div className="topbarIcons">
           <div className="topbarIconItem"  onClick={() => { navigate('/friends') }}>
             <Person />
-            <span className="topbarIconBadge">1</span>
+          {reqCount>0?  <span className="topbarIconBadge">{reqCount}</span>:""}
           </div>
           <div className="topbarIconItem" onClick={() => { navigate('/testChat') }}>
             <Chat />

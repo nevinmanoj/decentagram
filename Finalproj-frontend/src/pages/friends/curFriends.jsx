@@ -23,12 +23,13 @@ export default function CurFriends(){
     }
     useEffect(() => {
         async function getFriends(){
-            var friendNames=[];
+           
            
             const db = getFirestore();
             const docRef = doc(db, "users", connectedAccount);
             // const docSnap = await getDoc(docRef);
             const unsubscribe = onSnapshot(docRef, async (docSnap) => {
+                var friendNames=[];
                 const friendsList=docSnap.data()['friends'];
                 for(var i=0;i<friendsList.length;i++){
                     const friendRef = doc(db, "users", friendsList[i]);
@@ -36,7 +37,7 @@ export default function CurFriends(){
                     const frienddocSnap = await getDoc(friendRef);
                     
                     const friendName=frienddocSnap.data()['name'];
-                    console.log(friendName);
+                   
                     
                     friendNames.push(friendName);
                 }

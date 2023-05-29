@@ -37,19 +37,21 @@ export default function Requests(){
 
     useEffect(() => {
         async function getFriends() {
-            var requestNames = [];
-    
+           
+          
             const db = getFirestore();
             const docRef = doc(db, "users", connectedAccount);
     
             const unsubscribe = onSnapshot(docRef, async (docSnap) => {
+                var requestNames = [];
                 const requestsList = docSnap.data().requests;
-    
+               
                 for (var i = 0; i < requestsList.length; i++) {
+                  
                     const requestRef = doc(db, "users", requestsList[i]);
                     const requestdocSnap = await getDoc(requestRef);
                     const requestName = requestdocSnap.data().name;
-                    console.log(requestName);
+                    
                     requestNames.push(requestName);
                 }
     
@@ -66,38 +68,15 @@ export default function Requests(){
     
 
    
-
-    // useEffect(() => {
-    //     async function getFriends(){
-    //         var requestNames=[];
-           
-    //         const db = getFirestore();
-    //         const docRef = doc(db, "users", connectedAccount);
-    //         const docSnap = await getDoc(docRef);
-    //         const requestsList=docSnap.data()['requests'];
-    //         for(var i=0;i<requestsList.length;i++){
-    //             const requestRef = doc(db, "users", requestsList[i]);
-              
-    //             const requestdocSnap = await getDoc(requestRef);
-                
-    //             const requestName=requestdocSnap.data()['name'];
-    //             console.log(requestName);
-                
-    //             requestNames.push(requestName);
-    //         }
-              
-    //             setRequestsData([requestsList,requestNames]);
-    //     }
-    //     getFriends();
-      
-    // }, [connectedAccount]);
+    console.log(RequestData);
+    
 
     return(<div class="outer-req">
     <h4>Requests</h4>
      {RequestData[0].map((frnd, index) => (
         <div class="req-item">
             <div class="req-details">
-            {frnd}
+            {RequestData[0][index]}
             <br />
             {RequestData[1][index]}
              </div>  
