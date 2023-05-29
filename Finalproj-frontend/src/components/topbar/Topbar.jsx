@@ -1,12 +1,9 @@
 import "./topbar.css";
-import { Search, Person, Chat, Notifications } from "@material-ui/icons";
-import {
-  getFirestore, collection, doc, setDoc
-} from 'firebase/firestore';
+import {  Person, Chat, Notifications } from "@material-ui/icons";
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import DropDown from "../dropdown/dropdown";
-import { getEthereumContract } from "../../context/testContext";
+
 
 
 export default function Topbar() {
@@ -40,7 +37,7 @@ export default function Topbar() {
             <Chat />
             <span className="topbarIconBadge">2</span>
           </div>
-          <div className="topbarIconItem">
+          <div className="topbarIconItem" onClick={async() => {  }} >
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </div>

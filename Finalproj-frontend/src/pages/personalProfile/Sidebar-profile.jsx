@@ -37,7 +37,7 @@ export default function Sidebar() {
           </li>
           <li className="sidebarListItem">
             {/* <HelpOutline className="sidebarIcon" /> */}
-            <span className="sidebarListItemText">Support</span>
+            <span className="sidebarListItemText" onClick={()=>{ navigate('/dev');}}>Support</span>
           </li>
 
         </ul>

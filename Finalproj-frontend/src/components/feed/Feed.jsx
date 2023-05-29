@@ -1,10 +1,9 @@
 import Post from "../post/Post";
 import Share from "../share/Share";
 import "./feed.css";
-import { Posts } from "../../dummyData";
 import { useContext, useState, useEffect } from "react";
 
-import { getFirestore, collection, doc, setDoc, addDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { testContext } from "../../context/testContext";
 
 
