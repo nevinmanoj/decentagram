@@ -1,6 +1,6 @@
 import './requests.css'
 import {
-    getFirestore, arrayRemove, doc,updateDoc, getDoc,arrayUnion} from 'firebase/firestore'; 
+    getFirestore, arrayRemove, doc,updateDoc, getDoc,arrayUnion,onSnapshot} from 'firebase/firestore'; 
 
   import IconButton from '@mui/material/IconButton';
   import DeleteIcon from '@mui/icons-material/Delete';
@@ -35,34 +35,62 @@ export default function Requests(){
 
     }
 
-  
+    useEffect(() => {
+        async function getFriends() {
+            var requestNames = [];
+    
+            const db = getFirestore();
+            const docRef = doc(db, "users", connectedAccount);
+    
+            const unsubscribe = onSnapshot(docRef, async (docSnap) => {
+                const requestsList = docSnap.data().requests;
+    
+                for (var i = 0; i < requestsList.length; i++) {
+                    const requestRef = doc(db, "users", requestsList[i]);
+                    const requestdocSnap = await getDoc(requestRef);
+                    const requestName = requestdocSnap.data().name;
+                    console.log(requestName);
+                    requestNames.push(requestName);
+                }
+    
+                setRequestsData([requestsList, requestNames]);
+            });
+    
+            return () => {
+                unsubscribe();
+            };
+        }
+    
+        getFriends();
+    }, [connectedAccount]);
+    
 
    
 
-    useEffect(() => {
-        async function getFriends(){
-            var requestNames=[];
+    // useEffect(() => {
+    //     async function getFriends(){
+    //         var requestNames=[];
            
-            const db = getFirestore();
-            const docRef = doc(db, "users", connectedAccount);
-            const docSnap = await getDoc(docRef);
-            const requestsList=docSnap.data()['requests'];
-            for(var i=0;i<requestsList.length;i++){
-                const requestRef = doc(db, "users", requestsList[i]);
+    //         const db = getFirestore();
+    //         const docRef = doc(db, "users", connectedAccount);
+    //         const docSnap = await getDoc(docRef);
+    //         const requestsList=docSnap.data()['requests'];
+    //         for(var i=0;i<requestsList.length;i++){
+    //             const requestRef = doc(db, "users", requestsList[i]);
               
-                const requestdocSnap = await getDoc(requestRef);
+    //             const requestdocSnap = await getDoc(requestRef);
                 
-                const requestName=requestdocSnap.data()['name'];
-                console.log(requestName);
+    //             const requestName=requestdocSnap.data()['name'];
+    //             console.log(requestName);
                 
-                requestNames.push(requestName);
-            }
+    //             requestNames.push(requestName);
+    //         }
               
-                setRequestsData([requestsList,requestNames]);
-        }
-        getFriends();
+    //             setRequestsData([requestsList,requestNames]);
+    //     }
+    //     getFriends();
       
-    }, [connectedAccount]);
+    // }, [connectedAccount]);
 
     return(<div class="outer-req">
     <h4>Requests</h4>

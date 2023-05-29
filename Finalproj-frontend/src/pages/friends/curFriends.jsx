@@ -1,5 +1,5 @@
 import {
-    getFirestore, arrayRemove, doc,updateDoc, getDoc
+    getFirestore, arrayRemove, doc,updateDoc, getDoc,onSnapshot
   } from 'firebase/firestore'; 
   import "./curFriends.css";
   import IconButton from '@mui/material/IconButton';
@@ -27,20 +27,26 @@ export default function CurFriends(){
            
             const db = getFirestore();
             const docRef = doc(db, "users", connectedAccount);
-            const docSnap = await getDoc(docRef);
-            const friendsList=docSnap.data()['friends'];
-            for(var i=0;i<friendsList.length;i++){
-                const friendRef = doc(db, "users", friendsList[i]);
-              
-                const frienddocSnap = await getDoc(friendRef);
-                
-                const friendName=frienddocSnap.data()['name'];
-                console.log(friendName);
-                
-                friendNames.push(friendName);
-            }
-              
-                setFriendsData([friendsList,friendNames]);
+            // const docSnap = await getDoc(docRef);
+            const unsubscribe = onSnapshot(docRef, async (docSnap) => {
+                const friendsList=docSnap.data()['friends'];
+                for(var i=0;i<friendsList.length;i++){
+                    const friendRef = doc(db, "users", friendsList[i]);
+                  
+                    const frienddocSnap = await getDoc(friendRef);
+                    
+                    const friendName=frienddocSnap.data()['name'];
+                    console.log(friendName);
+                    
+                    friendNames.push(friendName);
+                }
+                  
+                    setFriendsData([friendsList,friendNames]);
+            });
+           
+                return () => {
+                    unsubscribe();
+                };
         }
         getFriends();
       

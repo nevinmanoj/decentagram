@@ -1,10 +1,10 @@
 
 import './addFriend.css'
 import { useContext, useState } from 'react';
-import Button from '@mui/material/Button';
+
 import { getEthereumContract } from "../../context/testContext"
 import {
-    getFirestore, arrayRemove, doc,updateDoc, getDoc,arrayUnion} from 'firebase/firestore'; 
+    getFirestore, doc,updateDoc,arrayUnion} from 'firebase/firestore'; 
 import { testContext } from '../../context/testContext';
 export default function AddFriend(){
     const [Addr, setAddr] = useState("");
