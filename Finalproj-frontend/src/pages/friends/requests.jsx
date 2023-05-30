@@ -1,7 +1,7 @@
 import './requests.css'
 import {
     getFirestore, arrayRemove, doc,updateDoc, getDoc,arrayUnion,onSnapshot} from 'firebase/firestore'; 
-
+    import Tooltip from '@mui/material/Tooltip';
   import IconButton from '@mui/material/IconButton';
   import DeleteIcon from '@mui/icons-material/Delete';
   import DoneIcon from '@mui/icons-material/Done';
@@ -80,12 +80,16 @@ export default function Requests(){
             <br />
             {RequestData[1][index]}
              </div>  
+             <Tooltip title="Accept Request" enterDelay={500} >
              <IconButton >
              <DoneIcon onClick={(e)=>{acceptRequest(frnd);}}/> 
                </IconButton>
+               </Tooltip>
+               <Tooltip title="Delete Request" enterDelay={500} >
              <IconButton >
              <DeleteIcon onClick={(e)=>{deleteRequest(frnd);}}/>
                </IconButton>
+               </Tooltip>
              
             
         </div>

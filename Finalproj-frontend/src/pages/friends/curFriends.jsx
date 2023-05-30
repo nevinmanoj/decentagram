@@ -6,7 +6,7 @@ import {
   import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext, useEffect,useState } from 'react';
 import { testContext } from '../../context/testContext';
-
+import Tooltip from '@mui/material/Tooltip';
 export default function CurFriends(){
     const {connectedAccount}=useContext(testContext);
     const [friendsData, setFriendsData] = useState([[],[]]);
@@ -59,10 +59,11 @@ export default function CurFriends(){
          {friendsData[0].map((frnd, index) => (
             <div>
                 {frnd}--{friendsData[1][index]}
-
+                <Tooltip title="Remove friend" enterDelay={500} >
                 <IconButton >
              <DeleteIcon onClick={(e)=>{deleteFriend(frnd);}}/>
                </IconButton>
+               </Tooltip>
             </div>
         ))}
 

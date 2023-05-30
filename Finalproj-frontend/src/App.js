@@ -21,6 +21,8 @@ export default function App() {
     <div>
       {(connectedAccount===""||connectedAccount==null)? <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<SignupPage />} />
        </Routes>:<Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" exact element={<Profile />} />

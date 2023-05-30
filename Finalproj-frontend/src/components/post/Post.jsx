@@ -1,9 +1,7 @@
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
-
 import { useContext, useState } from "react";
 import { testContext } from "../../context/testContext";
-
 import { getFirestore, updateDoc, arrayUnion, arrayRemove, doc } from 'firebase/firestore';
 
 export default function Post({ post, id }) {
@@ -13,6 +11,7 @@ export default function Post({ post, id }) {
 
   const likeHandler = async () => {
     const db = getFirestore();
+   
     const ref = doc(db, "posts", id);
 
 
@@ -36,6 +35,12 @@ export default function Post({ post, id }) {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   }
+  const [cheerVisible, setCheerVisible] = useState(false);
+
+  const viewCheers = () => {
+    setCheerVisible(!cheerVisible);
+  };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -69,17 +74,37 @@ export default function Post({ post, id }) {
         <div className="postBottom">
           <div className="postBottomLeft">
             <img className="likeIcon" src="assets/like.png" onClick={likeHandler} alt="" />
-            <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" />
+            {/* <img className="likeIcon" src="assets/heart.png" onClick={likeHandler} alt="" /> */}
             {isLiked ? <span className="postLikeCounter">You and {like - 1} people like it</span> : <span className="postLikeCounter">{like} people like it</span>}
 
 
           </div>
-          {/* <div className="postBottomRight">
-            <span className="postCommentText">{"post.comment"} comments</span>
-          </div> */}
+          <div className="postBottomRight" onClick={viewCheers}>
+          <img src="assets/eth.png" alt=""  className="likeIcon"/>
+            <span className="postCheerText">{"0.00105 Eth"} Cheered</span>
+          </div>
+          
         </div>
+        <div className={`cheer-body ${cheerVisible ? 'visible' : 'hidden'}`}>
+        <div class="new-cheer">
+            <input type="text" />
+            <div class="cheer-btn">Cheer <img src="assets/eth.png" alt=""  className="likeIcon"/></div>
+         
+        </div>
+        <div class="cheers">
+            <div class="cheer-item">
+               nevin cheered 0.0023
+            </div>
+            <div class="cheer-item">
+               guy cheered 0.1123
+            </div>
+            <div class="cheer-item">
+               pranoy cheered 0.0055
+            </div>
+        </div>
+        </div>
+        
       </div>
     </div>
   );
 }
-// post['like'].includes(connectedAccount)
