@@ -3,9 +3,9 @@ import './dev.css'
 import React, { useState,useEffect,useContext} from 'react';
 // import TransferContract from './TransferContract.json';
 import Web3 from 'web3';
-// import {
-//     getFirestore, collection, doc,updateDoc, getDocs
-//   } from 'firebase/firestore'; 
+import {
+    getFirestore, collection, doc,updateDoc, getDocs
+  } from 'firebase/firestore'; 
 import Topbar from '../../components/topbar/Topbar';
 import { TransfercontractABI,TransfercontractAddress } from "./trasnferConst";
  import { cheercontractAddress, cheercontractABI } from "./cheerConst";
@@ -16,19 +16,16 @@ const { ethereum } = window;
 async function addArrayToDocuments(e)  {
   console.log("uncomment and write code ");
     try {
-        //  const db = getFirestore();
+         const db = getFirestore();
         
-      //  const querySnapshot = await getDocs(collection(db, "posts"));
-      //  querySnapshot.forEach(async(cdoc) => {
-      //    const ref = doc(db, "posts",cdoc.id);
-      //   const date=cdoc.data().date.split("/");
-      //   const time=cdoc.data().time.split(".");
-      //   const dateTime=date[2]+"0"+date[1]+date[0]+time[0]+time[1]+time[2]
-      //   console.log(dateTime);
-      //  await updateDoc(ref, {
-      //    dateTime: dateTime
-      //  });
-      //  });
+       const querySnapshot = await getDocs(collection(db, "users"));
+       querySnapshot.forEach(async(cdoc) => {
+         const ref = doc(db, "users",cdoc.id);
+   
+       await updateDoc(ref, {
+         following: []
+       });
+       });
       
   
        console.log('data added to all documents successfully.');

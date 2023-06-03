@@ -12,6 +12,7 @@ import { testContext } from "./context/testContext";
 import { useContext } from "react";
 import Friends from "./pages/friends/friends";
 import DevDash from "./pages/devDash/devFunction";
+import Follow from "./pages/follow/follow"
 
 export default function App() {
   const {connectedAccount}=useContext(testContext);
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/testChat" element={<TestChat />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="/dev" element={<DevDash />} />
+        <Route path="/follow" element={<Follow />} />
       </Routes>}
      
 

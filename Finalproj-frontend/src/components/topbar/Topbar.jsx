@@ -62,7 +62,7 @@ useEffect(() => {
             <Chat />
             <span className="topbarIconBadge">2</span>
           </div>
-          <div className="topbarIconItem" onClick={async() => {  }} >
+          <div className="topbarIconItem" onClick={() => { navigate('/follow') }} >
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </div>

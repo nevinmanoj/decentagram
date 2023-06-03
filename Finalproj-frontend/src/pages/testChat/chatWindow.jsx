@@ -77,6 +77,9 @@ export default function ChatWindow(props) {
             }
             else {
                 console.log("message sent,trnx hash:" + transcationHash);
+                setmsg("");
+                
+
             }
         });
     }
@@ -96,7 +99,7 @@ export default function ChatWindow(props) {
 
             </div>
             <div class="msg-send-outer">
-                <input type="text" class="msg-send-box" onChange={(e) => setmsg(e.target.value)} />
+                <input type="text" class="msg-send-box" onChange={(e) => setmsg(e.target.value)} value={msg} />
                 <div class="msg-send-btn" onClick={() => sendMessage()}>Send</div>
 
             </div>
