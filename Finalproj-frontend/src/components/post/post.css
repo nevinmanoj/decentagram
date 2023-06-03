@@ -128,3 +128,24 @@
     /* overflow-x: visible;
     overflow-y: auto; */
 }
+.spin-out-image{
+ 
+  height: 24px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.postBottomRight:hover>.spin-out-image{
+  animation: spin-out 1s 1 ease-in-out;
+  transform-origin: center center;
+ 
+  
+}
+@keyframes spin-out {
+  from {
+    transform: rotateY(0deg);
+  }
+  
+  to {
+    transform: rotateY(360deg);
+  }
+}

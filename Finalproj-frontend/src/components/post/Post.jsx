@@ -80,7 +80,7 @@ export default function Post({ post, id }) {
 
           </div>
           <div className="postBottomRight" onClick={viewCheers}>
-          <img src="assets/eth.png" alt=""  className="likeIcon"/>
+          <img src="assets/eth.png" alt=""  className="spin-out-image"/>
             <span className="postCheerText">{"0.00105 Eth"} Cheered</span>
           </div>
           

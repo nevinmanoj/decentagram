@@ -16,9 +16,7 @@ export default function ChatWindow(props) {
         connectedAccount
     } = useContext(testContext);
 
-
-
-    useEffect(() => {
+    const getMessages=async()=>{
         chatcontract.getPastEvents('message', {
             fromBlock: 0,
             toBlock: 'latest',
@@ -51,7 +49,18 @@ export default function ChatWindow(props) {
             setmsglist(msgs);
 
         });
+    };
+
+    useEffect(() => {
+        const messageEvent = chatcontract.events.message();
+    messageEvent.on('data', async(event) =>{
+      console.log("blockchain updated");
+       getMessages();
+    });
+        getMessages();
     }, [parameter]);
+
+    
 
 
     function sendMessage() {

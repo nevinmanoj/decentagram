@@ -70,6 +70,76 @@
       "artifacts": [
         "chat"
       ]
+    },
+    "D:\\dev\\react\\finalProj\\smart_contracts\\contracts\\TransferContract.sol": {
+      "lastModificationDate": 1685562932565,
+      "contentHash": "6235f4807b805594cf1121f474eb3cb7",
+      "sourceName": "contracts/TransferContract.sol",
+      "solcConfig": {
+        "version": "0.8.18",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "TransferContract"
+      ]
+    },
+    "D:\\dev\\react\\finalProj\\smart_contracts\\contracts\\cheer.sol": {
+      "lastModificationDate": 1685535793819,
+      "contentHash": "e6d32140ab7b9f2576ca835942d676ea",
+      "sourceName": "contracts/cheer.sol",
+      "solcConfig": {
+        "version": "0.8.18",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "cheer"
+      ]
     }
   }
 }

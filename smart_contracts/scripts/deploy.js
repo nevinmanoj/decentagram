@@ -3,11 +3,11 @@ const main=async() =>{
  
 
 
-  const test = await hre.ethers.getContractFactory("test");
+  const test = await hre.ethers.getContractFactory("TransferContract");
   const lock = await test.deploy();
 
   await lock.deployed();
- console.log("test deployed to:",lock.address);
+ console.log("contract deployed to:",lock.address);
 }
 
 

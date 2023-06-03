@@ -23,16 +23,13 @@ export default function TestChat() {
     connectedAccount
   } = useContext(testContext);
 
-  let {
-    curUserName
-  } = useContext(testContext);
 
   var accounts = [];
   var accountnames = [];
   var myMap = {};
 
   var msgs = {};
-  useEffect(() => {
+  const getMessages=async()=>{
     chatcontract.getPastEvents('message', {
       fromBlock: 0,
       toBlock: 'latest',
@@ -110,14 +107,20 @@ export default function TestChat() {
       // console.log(accountnames);
       setacs([accounts, msgs, accountnames]);
 
-
-
-
-
     });
+    }
+  useEffect(() => {
+    const messageEvent = chatcontract.events.message();
+    messageEvent.on('data', async(event) =>{
+      console.log("blockchain updated");
+       getMessages();
+    });
+    getMessages();
+   
+    
   }, [connectedAccount]);
-
-
+  
+  
   function expand(a, b) {
 
     setchatDisp([a, b]);
