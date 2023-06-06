@@ -140,6 +140,13 @@
  
   
 }
+.cheer-btn{
+  background-color: #9DC08B;
+  width:80px
+}
+.cheer-btn:hover{
+  background-color: #80a46e;
+}
 @keyframes spin-out {
   from {
     transform: rotateY(0deg);
@@ -148,4 +155,10 @@
   to {
     transform: rotateY(360deg);
   }
+}
+.cheer-item{
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+  padding: 5px;
+  text-align: center;
 }
