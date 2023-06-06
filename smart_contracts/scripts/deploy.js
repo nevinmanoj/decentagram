@@ -3,7 +3,7 @@ const main=async() =>{
  
 
 
-  const test = await hre.ethers.getContractFactory("TransferContract");
+  const test = await hre.ethers.getContractFactory("cheer");
   const lock = await test.deploy();
 
   await lock.deployed();

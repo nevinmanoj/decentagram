@@ -3,22 +3,19 @@
 pragma solidity ^0.8.0;
 
 contract cheer {
-    uint256 transactionCount;
-
-    event Transfer(address from, address receiver, uint amount, string message, uint256 timestamp, string keyword);
-  
-   
-
-    function addToBlockchain(address payable receiver, uint amount, string memory message, string memory keyword) public {
-        transactionCount += 1;
-       
-
-        emit Transfer(msg.sender, receiver, amount, message, block.timestamp, keyword);
-    }
-
     
 
-    function getTransactionCount() public view returns (uint256) {
-        return transactionCount;
+   
+    
+     event newCheer(address from, address indexed receiver, uint amount, string message, uint256 timestamp, string indexed postid);
+    
+
+   
+    function sendEth(address payable recipient, string memory _postid, string memory _message) external payable {
+        emit newCheer(msg.sender,recipient,msg.value,_message, block.timestamp,_postid);
+        recipient.transfer(msg.value);
     }
+    
+
+    
 }

@@ -1,4 +1,4 @@
 import abi from './cheer.json'
 
-export const cheercontractAddress="0x759d353e8Fccd2099715875e076E21D46dd22982";
+export const cheercontractAddress="0x598d0e0577e326233b51FC039F8B07d30478d896";
 export const cheercontractABI=abi.abi;

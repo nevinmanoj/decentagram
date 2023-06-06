@@ -55,7 +55,7 @@ export default function Following(){
     }, [connectedAccount]);
     
     
-    return(<div class="outer-cur">
+    return(<div class="outer-following">
         <h4>Following</h4>
          {friendsData[0].map((frnd, index) => (
             <div>
