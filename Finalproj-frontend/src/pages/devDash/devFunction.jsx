@@ -2,7 +2,7 @@
 import './dev.css'
 
 import {
-    getFirestore, collection, doc,updateDoc, getDocs,deleteField
+    getFirestore, collection, doc,updateDoc, getDocs,deleteField,where,query
   } from 'firebase/firestore'; 
 import Topbar from '../../components/topbar/Topbar';
 
@@ -22,7 +22,17 @@ async function addArrayToDocuments(e)  {
       //    requests:deleteField()
       //  });
       //  });
-      
+      const db = getFirestore();
+      var username=prompt("username:");
+      const q = query(collection(db, "users"), where("email", "==", username));
+
+      const querySnapshot = await getDocs(q);
+      if(querySnapshot.empty){
+        alert("unique")
+      }
+      else{
+        alert("not unique")
+      }
   
        console.log('data added to all documents successfully.');
     } catch (error) {

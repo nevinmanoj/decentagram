@@ -75,7 +75,7 @@ export default function Post({ post, id }) {
           return b.amount - a.amount;
         });
         for(var m=0;m<chdata.length;m++){
-          var username = await testcontract.getUserName(data[n].returnValues.from.toString().toLowerCase());
+          var username = await testcontract.getUserName(chdata[m].from.toString().toLowerCase());
             names.push(username);
         }
         

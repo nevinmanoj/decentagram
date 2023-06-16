@@ -28,7 +28,7 @@ export default function TestChat() {
   var accountnames = [];
   var myMap = {};
 
-  var msgs = {};
+ 
   const getMessages=async()=>{
     chatcontract.getPastEvents('message', {
       fromBlock: 0,
@@ -56,11 +56,7 @@ export default function TestChat() {
             myMap[data[n].returnValues.to.toLowerCase()] = true;
 
             accounts.push(data[n].returnValues.to.toLowerCase());
-            // username = await contract.getUserName(accounts[n]);
-            // console.log(data[n].returnValues.to.toLowerCase().toString());
             username = await contract.getUserName(data[n].returnValues.to.toLowerCase().toString());
-            // console.log(username);
-            // var username = contract.getUserName(accounts[n]);
 
             if (username === null) {
               accountnames.push("No name");
@@ -70,11 +66,8 @@ export default function TestChat() {
               accountnames.push(username)
             }
 
-            msgs[data[n].returnValues.to.toLowerCase()] = [[]];
-
           }
 
-          msgs[data[n].returnValues.to.toLowerCase()].push([data[n].returnValues.message, "snd"]);
         }
 
         if ((data[n].returnValues.to.toLowerCase() === connectedAccount)) {
@@ -85,9 +78,6 @@ export default function TestChat() {
             myMap[data[n].returnValues.from.toLowerCase()] = true;
 
             accounts.push(data[n].returnValues.from.toLowerCase());
-            // username = await contract.getUserName(accounts[n]);
-
-
             username = await contract.getUserName(data[n].returnValues.from.toLowerCase().toString());
 
 
@@ -98,20 +88,13 @@ export default function TestChat() {
             else {
               accountnames.push(username);
             }
-
-            msgs[data[n].returnValues.from.toLowerCase()] = [[]];
-
-
-
           }
-
-          msgs[data[n].returnValues.from.toLowerCase()].push([data[n].returnValues.message, "rec"]);
         }
       }
 
 
       // console.log(accountnames);
-      setacs([accounts, msgs, accountnames]);
+      setacs([accounts, accountnames]);
 
     });
     }
@@ -141,8 +124,6 @@ export default function TestChat() {
     var time = new Date().toLocaleTimeString("IN");
     time = time.split('.')
     var accurateTime = date + ' ' + time[0] + ':' + time[1];
-    // var fixedaccount='0x5419b6A3CFb21678E1D0D33650bD78f14dBeD8D7';
-    // const account = web3.eth.accounts.privateKeyToAccount('6f7838bf40d713eea51030028ebe046057370cf15c846e20e4cf66f09a5f5cc4');
     chatcontract.methods.sendMessage(connectedAccount, address, message, accurateTime).send({ from: connectedAccount }, function (err, transcationHash) {
       if (err) {
         console.log(err);
@@ -175,7 +156,7 @@ export default function TestChat() {
 
 
 
-            <div key={item} class="account" onClick={() => expand(acs[0][index], acs[2][index])}>{acs[2][index].split("@")[0]}
+            <div key={item} class="account" onClick={() => expand(acs[0][index], acs[1][index])}>{acs[1][index].split("@")[0]}
             </div>
 
 

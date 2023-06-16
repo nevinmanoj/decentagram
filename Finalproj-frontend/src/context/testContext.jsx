@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import {
-    getFirestore, collection, doc, setDoc
+    getFirestore, collection, doc, setDoc,getDocs,where,query
 } from 'firebase/firestore';
 import { contractABI, contractAddress } from '../utils/constants';
 import AuthenticationHash from '../utils/authenticateHash';
@@ -101,7 +101,14 @@ export const TestProvider = ({ children }) => {
             const web3 = await web3Connection();
             const sign = await AuthenticationHash(username, connectedAccount, password, web3);
             console.log("sign:" + sign);
+            
+            
+            const db = getFirestore();
+             const q = query(collection(db, "users"), where("email", "==", username));
 
+             const querySnapshot = await getDocs(q);
+            if(querySnapshot.empty){
+                
             const userAdr = await testContract.getUserAddress();
             console.log("userAdr:" + userAdr);
             const testHash = await testContract.regUser(username, sign);
@@ -113,7 +120,7 @@ export const TestProvider = ({ children }) => {
 
             const userCount = await testContract.getUserCount();
             console.log("userCount:" + userCount);
-            const db = getFirestore();
+            
 
             // collection ref
             const colRef = collection(db, 'users');
@@ -127,6 +134,12 @@ export const TestProvider = ({ children }) => {
 
             };
             await setDoc(doc(db, "users", connectedAccount), docData);
+
+            }
+            else{
+                alert("username/email already taken");
+            }
+            
 
             // setuserCount(userCount.toNumber);
         } catch (error) {
