@@ -14,7 +14,7 @@ export default function Post({ post, id }) {
   const [isLiked, setIsLiked] = useState(post['like'].includes(connectedAccount));
   const [message, setMessage] = useState("");
   const [amount, setAmount] = useState("");
-  const [cheerData, setcheerData] = useState([[],[]]);
+  const [cheerData, setcheerData] = useState([[],[],0]);
 
   const likeHandler = async () => {
     const db = getFirestore();
@@ -63,14 +63,16 @@ export default function Post({ post, id }) {
     }, async (err, data) => {
         var chdata=[];
         var names=[];
+        var x=0;
         for(var n=0;n<data.length;n++){
            if(data[n].returnValues.postid===id){
             var username = await testcontract.getUserName(data[n].returnValues.from.toString().toLowerCase());
             names.push(username);
             chdata.push(data[n].returnValues);
+            x+=data[n].returnValues.amount;
            }
         }
-        setcheerData([chdata,names]);
+        setcheerData([chdata,names,x]);
     });
     }
   useEffect(() => {
@@ -134,7 +136,7 @@ export default function Post({ post, id }) {
           </div>
           <div className="postBottomRight" onClick={viewCheers}>
           <img src="assets/eth.png" alt=""  className="spin-out-image"/>
-            <span className="postCheerText">{"0.00105 Eth"} Cheered</span>
+            <span className="postCheerText">{cheerData[2]/ 10**18+"Eth"} Cheered</span>
           </div>
           
         </div>

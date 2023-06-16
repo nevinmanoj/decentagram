@@ -41,7 +41,7 @@ import { testContext } from "../../context/testContext";
             const docRef = doc(db, "users", connectedAccount);
             // const docSnap = await getDoc(docRef);
             const unsubscribe = onSnapshot(docRef, async (docSnap) => {
-                const friendsList=docSnap.data()['friends'];
+                const friendsList=docSnap.data()['following'];
                 for(var i=0;i<friendsList.length;i++){
                     const friendRef = doc(db, "users", friendsList[i]);
                   
@@ -85,7 +85,7 @@ import { testContext } from "../../context/testContext";
             <span className="rightbarInfoValue">Single</span>
           </div>
         </div>
-        <h4 className="rightbarTitle">User friends</h4>
+        <h4 className="rightbarTitle">Following</h4>
         <div className="rightbarFollowings">
           
         {friendsData[0].map((f,i)=>( <div className="rightbarFollowing">

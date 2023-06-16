@@ -2,7 +2,7 @@
 import './dev.css'
 
 import {
-    getFirestore, collection, doc,updateDoc, getDocs
+    getFirestore, collection, doc,updateDoc, getDocs,deleteField
   } from 'firebase/firestore'; 
 import Topbar from '../../components/topbar/Topbar';
 
@@ -12,16 +12,16 @@ import Topbar from '../../components/topbar/Topbar';
 async function addArrayToDocuments(e)  {
   console.log("uncomment and write code ");
     try {
-         const db = getFirestore();
+      //    const db = getFirestore();
         
-       const querySnapshot = await getDocs(collection(db, "users"));
-       querySnapshot.forEach(async(cdoc) => {
-         const ref = doc(db, "users",cdoc.id);
+      //  const querySnapshot = await getDocs(collection(db, "users"));
+      //  querySnapshot.forEach(async(cdoc) => {
+      //    const ref = doc(db, "users",cdoc.id);
    
-       await updateDoc(ref, {
-         following: []
-       });
-       });
+      //  await updateDoc(ref, {
+      //    requests:deleteField()
+      //  });
+      //  });
       
   
        console.log('data added to all documents successfully.');

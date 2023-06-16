@@ -10,29 +10,29 @@ import {
 } from 'firebase/firestore'; 
 
 export default function Topbar() {
-const {connectedAccount}=useContext(testContext);
-const [reqCount, setreqCount] = useState(0);
-useEffect(() => {
+// const {connectedAccount}=useContext(testContext);
+// const [reqCount, setreqCount] = useState(0);
+// useEffect(() => {
   
-  async function getData(){
-    const db = getFirestore();
-    const docRef = doc(db, "users", connectedAccount);
+//   async function getData(){
+//     const db = getFirestore();
+//     const docRef = doc(db, "users", connectedAccount);
     
-    const unsubscribe = onSnapshot(docRef, async (docSnap) => {
+//     const unsubscribe = onSnapshot(docRef, async (docSnap) => {
      
-        setreqCount(docSnap.data()['requests'].length);
-      });
+//         setreqCount(docSnap.data()['requests'].length);
+//       });
         
     
   
  
-      return () => {
-          unsubscribe();
-      };
-  }
-  getData();
+//       return () => {
+//           unsubscribe();
+//       };
+//   }
+//   getData();
   
-}, [connectedAccount]);
+// }, [connectedAccount]);
   const navigate = useNavigate();
   return (
     <div className="topbarContainer">
@@ -54,15 +54,15 @@ useEffect(() => {
           <span className="topbarLink" onClick={() => { navigate('/profile') }}>Profile</span>
         </div>
         <div className="topbarIcons">
-          <div className="topbarIconItem"  onClick={() => { navigate('/friends') }}>
+          <div className="topbarIconItem"  onClick={() => { navigate('/follow') }}>
             <Person />
-          {reqCount>0?  <span className="topbarIconBadge">{reqCount}</span>:""}
+          {/* {reqCount>0?  <span className="topbarIconBadge">{reqCount}</span>:""} */}
           </div>
           <div className="topbarIconItem" onClick={() => { navigate('/testChat') }}>
             <Chat />
             <span className="topbarIconBadge">2</span>
           </div>
-          <div className="topbarIconItem" onClick={() => { navigate('/follow') }} >
+          <div className="topbarIconItem"  >
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </div>
