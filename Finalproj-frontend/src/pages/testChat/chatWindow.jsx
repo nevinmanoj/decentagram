@@ -20,6 +20,18 @@ export default function ChatWindow(props) {
         chatcontract.getPastEvents('message', {
             fromBlock: 0,
             toBlock: 'latest',
+            filter: {
+                $or: [
+                  { $and: [
+                    { filter: { from: connectedAccount } },
+                    { filter: { to: parameter[0].toLowerCase() } }
+                  ]},
+                  { $and: [
+                    { filter: { to: connectedAccount } },
+                    { filter: { from: parameter[0].toLowerCase() } }
+                  ]}
+                ]
+              }
 
         }, function (err, data) {
             //   var msgs=[["test","rec"],["test","rec"],["test","rec"],["test","snd"],["test","rec"],["test","snd"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"],["test","rec"]];

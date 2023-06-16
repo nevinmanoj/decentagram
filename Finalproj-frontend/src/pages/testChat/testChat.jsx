@@ -33,6 +33,12 @@ export default function TestChat() {
     chatcontract.getPastEvents('message', {
       fromBlock: 0,
       toBlock: 'latest',
+      filter: {
+        $or: [
+          { filter: { from: [connectedAccount] } },
+          { filter: { to: [connectedAccount] } }
+        ]
+      },
 
     }, async (err, data) => {
       // console.log(data);

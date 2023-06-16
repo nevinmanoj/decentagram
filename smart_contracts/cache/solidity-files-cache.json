@@ -37,8 +37,8 @@
       ]
     },
     "D:\\dev\\react\\finalProj\\smart_contracts\\contracts\\chat.sol": {
-      "lastModificationDate": 1684921030734,
-      "contentHash": "e49cfeb137ffa326b46bc067bb3410b7",
+      "lastModificationDate": 1686946360901,
+      "contentHash": "9c5c5f05d1f2cad02065dafd9f4bbcf0",
       "sourceName": "contracts/chat.sol",
       "solcConfig": {
         "version": "0.8.18",

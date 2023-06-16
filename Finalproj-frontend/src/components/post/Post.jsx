@@ -38,7 +38,7 @@ export default function Post({ post, id }) {
     const web3 = new Web3(window.ethereum);
     const contractInstance = new web3.eth.Contract(cheercontractABI, cheercontractAddress);
     try {
-      console.log("cheering for"+typeof(id));
+      
       await contractInstance.methods.sendEth(post['author'],id,message).send({
         from: connectedAccount,
         value: web3.utils.toWei(amount, 'ether'),
@@ -66,12 +66,19 @@ export default function Post({ post, id }) {
         var x=0;
         for(var n=0;n<data.length;n++){
            if(data[n].returnValues.postid===id){
-            var username = await testcontract.getUserName(data[n].returnValues.from.toString().toLowerCase());
-            names.push(username);
+            
             chdata.push(data[n].returnValues);
             x+=data[n].returnValues.amount;
            }
         }
+        chdata.sort(function(a, b) {
+          return b.amount - a.amount;
+        });
+        for(var m=0;m<chdata.length;m++){
+          var username = await testcontract.getUserName(data[n].returnValues.from.toString().toLowerCase());
+            names.push(username);
+        }
+        
         setcheerData([chdata,names,x]);
     });
     }
