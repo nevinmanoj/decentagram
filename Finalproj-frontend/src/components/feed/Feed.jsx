@@ -14,7 +14,7 @@ export default function Feed() {
   const [data, setData] = useState([[], []]);
   const [isPublicFeed, setisPublicFeed] = useState(true);
   const { connectedAccount } = useContext(testContext);
-  const db = getFirestore();
+ 
 
   const changeFeed=()=>{
     setisPublicFeed(!isPublicFeed);
@@ -22,8 +22,9 @@ export default function Feed() {
 
 
 useEffect(() => {
-
+  const db = getFirestore();
 const unsubscribe = onSnapshot(doc(db, "users", connectedAccount),(docSnap)=>{
+ 
   var postquery=isPublicFeed?
   query(collection(db, "posts"), orderBy("dateTime", "desc"))
   :query(collection(db, "posts"), orderBy("dateTime", "desc"),where("author", "in", docSnap.data()["following"]),)
@@ -54,7 +55,7 @@ const unsubscribe = onSnapshot(doc(db, "users", connectedAccount),(docSnap)=>{
     return () => {
         unsubscribe();
     };
-}, [isPublicFeed]);
+}, [isPublicFeed,connectedAccount]);
 
 
 

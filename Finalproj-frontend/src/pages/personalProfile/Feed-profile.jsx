@@ -66,7 +66,7 @@ export default function Feed() {
       <div className="feedWrapper">
         <Share />
         {data[0].map((p, i) => (
-          <Post key={data[0][i]} post={data[1][i]} id={p} />
+          <Post key={data[0][i]} post={data[1][i]} id={p} followText={"self"} />
         ))}
       </div>
     </div>

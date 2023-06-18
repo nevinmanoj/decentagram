@@ -32,6 +32,7 @@ import { testContext } from "../../context/testContext";
     export default function Rightbar() {
       const {connectedAccount}=useContext(testContext);
       const [friendsData, setFriendsData] = useState([[],[]]);
+      const [email, setemail] = useState("");
       useEffect(() => {
         async function getFriends(){
             var friendNames=[];
@@ -54,7 +55,7 @@ import { testContext } from "../../context/testContext";
                     friendNames.push(friendName);
                     friendpps.push(pp);
                 }
-                  
+                    setemail(docSnap.data()['email'])
                     setFriendsData([friendsList,friendNames,friendpps]);
             });
            
@@ -73,17 +74,11 @@ import { testContext } from "../../context/testContext";
         <h4 className="rightbarTitle">User information</h4>
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">City:</span>
-            <span className="rightbarInfoValue">New York</span>
+            <span className="rightbarInfoKey">Email:</span>
+            <span className="rightbarInfoValue">{email}</span>
           </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">From:</span>
-            <span className="rightbarInfoValue">Madrid</span>
-          </div>
-          <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">Relationship:</span>
-            <span className="rightbarInfoValue">Single</span>
-          </div>
+          
+          
         </div>
         <h4 className="rightbarTitle">Following</h4>
         <div className="rightbarFollowings">
