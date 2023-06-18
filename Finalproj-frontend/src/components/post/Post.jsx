@@ -8,7 +8,7 @@ import Web3 from 'web3';
 import { getEthereumContract } from "../../context/testContext";
 
 
-export default function Post({ post, id }) {
+export default function Post({ post, id, followText }) {
   const { connectedAccount } = useContext(testContext);
   const [like, setLike] = useState(post['like'].length)
   const [isLiked, setIsLiked] = useState(post['like'].includes(connectedAccount));
@@ -32,6 +32,33 @@ export default function Post({ post, id }) {
     }
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
+  }
+
+  const FollowUnFollow=async()=>{
+    const db = getFirestore();
+    if(followText==="Follow"){
+     
+    
+      const frndref = doc(db, "users", post['author']);
+      await updateDoc(frndref, {
+          followers: arrayUnion(connectedAccount)
+        });
+        const myref = doc(db, "users", connectedAccount);
+      await updateDoc(myref, {
+          following: arrayUnion(post['author'])
+        });
+    }
+    else if(followText==="Unfollow"){
+      
+      const ref = doc(db, "users", connectedAccount);
+      await updateDoc(ref, {
+          following: arrayRemove(post['author'])
+        });
+        const frndref = doc(db, "users", post['author']);
+      await updateDoc(frndref, {
+          followers: arrayRemove(connectedAccount)
+        });
+    }
   }
 
   const handleNewCheer=async()=>{
@@ -125,9 +152,11 @@ export default function Post({ post, id }) {
             </span>
             <span className="postDate">{post["date"]}</span>
           </div>
-          <div className="postTopRight">
-            <MoreVert />
-          </div>
+          
+          {followText==="self"?"":<div className="postTopRight" onClick={FollowUnFollow}>
+            {followText}
+          </div>}
+          
         </div>
         <div className="postCenter">
           <span className="postText">{post['details']}</span>

@@ -45,7 +45,11 @@ export default function NewFollow(){
                 alert("Invalid Address");
             }
             else{
-                const db = getFirestore();
+                if(Addr.toLowerCase()===connectedAccount){
+                    alert("cannot follow yourself")
+                }
+                else{
+                    const db = getFirestore();
                 const frndref = doc(db, "users", Addr);
                 await updateDoc(frndref, {
                     followers: arrayUnion(connectedAccount)
@@ -54,6 +58,8 @@ export default function NewFollow(){
                 await updateDoc(myref, {
                     following: arrayUnion(Addr)
                   });
+                }
+                
             }
             
         }
