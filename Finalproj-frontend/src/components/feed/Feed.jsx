@@ -3,7 +3,7 @@ import Share from "../share/Share";
 import "./feed.css";
 import { useContext, useState, useEffect } from "react";
 
-import { getFirestore, collection, orderBy,query,onSnapshot,doc } from 'firebase/firestore';
+import { getFirestore, collection, orderBy,query,onSnapshot,doc,where } from 'firebase/firestore';
 import { testContext } from "../../context/testContext";
 
 
@@ -12,27 +12,22 @@ import { testContext } from "../../context/testContext";
 export default function Feed() {
 
   const [data, setData] = useState([[], []]);
-
+  const [isPublicFeed, setisPublicFeed] = useState(true);
   const { connectedAccount } = useContext(testContext);
   const db = getFirestore();
 
+  const changeFeed=()=>{
+    setisPublicFeed(!isPublicFeed);
+  }
 
 
 useEffect(() => {
-//   const unsubscribe = onSnapshot(query(collection(db, "posts"), orderBy("dateTime", "desc")), (querySnapshot) => {
-//     var keys = [];
-//     var posts = [];
 
-//     querySnapshot.forEach((doc) => {
-//         keys.push(doc.id);
-//         posts.push(doc.data());
-//     });
-
-//     setData([keys, posts]);
-// });
 const unsubscribe = onSnapshot(doc(db, "users", connectedAccount),(docSnap)=>{
-  // var following=Object.values(docSnap.data()["following"]);
-  onSnapshot(query(collection(db, "posts"), orderBy("dateTime", "desc")), (querySnapshot) => {
+  var postquery=isPublicFeed?
+  query(collection(db, "posts"), orderBy("dateTime", "desc"))
+  :query(collection(db, "posts"), orderBy("dateTime", "desc"),where("author", "in", docSnap.data()["following"]),)
+  onSnapshot(postquery, (querySnapshot) => {
     var keys = [];
     var posts = [];
     var followText=[];
@@ -53,36 +48,14 @@ const unsubscribe = onSnapshot(doc(db, "users", connectedAccount),(docSnap)=>{
     });
    
     setData([keys, posts,followText]);
+    
   });
 });
     return () => {
         unsubscribe();
     };
-}, []);
-  // useEffect(() => {
+}, [isPublicFeed]);
 
-  //   async function getData() {
-  //     const db = getFirestore();
-  //     // var username = await getUserName();
-  //     // console.log(username);
-
-  //     var keys = [];
-  //     var posts = [];
-
-  //     const querySnapshot = await getDocs(collection(db, "posts"));
-  //     querySnapshot.forEach((doc) => {
-  //       keys.push(doc.id);
-  //       posts.push(doc.data());
-  //       // console.log(doc.id, " => ", doc.data());
-  //     });
-  //     setData([keys, posts]);
-      
-
-  //   }
-  //   getData();
-
-
-  // }, [])
 
 
 
@@ -92,6 +65,20 @@ const unsubscribe = onSnapshot(doc(db, "users", connectedAccount),(docSnap)=>{
   return (
     <div className="feed">
       <div className="feedWrapper">
+        <div className="header">
+          <div className="headerItem1" onClick={changeFeed}>
+          <div className={isPublicFeed?"selected":"notSelected"}>
+            Public  
+            </div>
+            
+          </div>
+          <div className="headerItem2" onClick={changeFeed}>
+          <div className={!isPublicFeed?"selected":"notSelected"}>
+          Following  
+            </div>
+            
+          </div>
+        </div>
         <Share />
         {data[0].map((id, index) => (
           <Post key={id} post={data[1][index]} id={id} followText={data[2][index]} />

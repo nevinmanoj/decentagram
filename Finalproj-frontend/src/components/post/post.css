@@ -162,3 +162,12 @@
   padding: 5px;
   text-align: center;
 }
+.postTopRight{
+  border:1px solid rgb(208, 208, 208);
+  padding: 2px;
+  width: 5vw;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #7d7d7d;
+}
