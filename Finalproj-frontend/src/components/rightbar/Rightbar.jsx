@@ -119,10 +119,10 @@ export default function Rightbar({ profile }) {
 
 
         <hr className="sidebarHr" />
-        <ul className="sidebarFriendList">
+        <ul className="sidebarFriendList" >
           {acs[0].map((u, index) => (
 
-            <CloseFriend key={u.id} name={acs[1][index]} id={u} />
+            <CloseFriend key={u.id} name={acs[1][index]} id={u}/>
           ))}
         </ul>
 

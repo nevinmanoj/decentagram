@@ -6,6 +6,7 @@
   background-color: #ebf0ec;
   border-radius: 10px;
   height: 3rem;
+  cursor: pointer;
 }
 
 .sidebarFriendImg {
@@ -19,7 +20,7 @@
 .sidebarFriendName {
   margin-left: 3rem;
   font-size: 1.25rem;
-  cursor: pointer;
+  
   background-color: #ebf0ec;
 
 }

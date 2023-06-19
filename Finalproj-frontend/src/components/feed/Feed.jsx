@@ -67,13 +67,13 @@ const unsubscribe = onSnapshot(doc(db, "users", connectedAccount),(docSnap)=>{
     <div className="feed">
       <div className="feedWrapper">
         <div className="header">
-          <div className="headerItem1" onClick={changeFeed}>
+          <div className="headerItem1" onClick={isPublicFeed?"":changeFeed}>
           <div className={isPublicFeed?"selected":"notSelected"}>
             Public  
             </div>
             
           </div>
-          <div className="headerItem2" onClick={changeFeed}>
+          <div className="headerItem2" onClick={!isPublicFeed?"":changeFeed}>
           <div className={!isPublicFeed?"selected":"notSelected"}>
           Following  
             </div>

@@ -70,6 +70,8 @@ export default function Post({ post, id, followText }) {
         from: connectedAccount,
         value: web3.utils.toWei(amount, 'ether'),
       });
+      setAmount("");
+      setMessage("");
       console.log('Ether sent successfully!');
     } catch (error) {
       console.error('Error sending Ether:', error);
@@ -95,7 +97,8 @@ export default function Post({ post, id, followText }) {
            if(data[n].returnValues.postid===id){
             
             chdata.push(data[n].returnValues);
-            x+=data[n].returnValues.amount;
+            x+=parseFloat(data[n].returnValues.amount);
+         
            }
         }
         chdata.sort(function(a, b) {
@@ -178,8 +181,8 @@ export default function Post({ post, id, followText }) {
         </div>
         <div className={`cheer-body ${cheerVisible ? 'visible' : 'hidden'}`}>
         <div class="new-cheer">
-            <input type="text" placeholder="ETH" onChange={(event) => {setAmount(event.target.value);}} />
-            <input type="text" placeholder="message" onChange={(event) => {setMessage(event.target.value);}} />
+            <input type="text" placeholder="ETH" onChange={(event) => {setAmount(event.target.value);}} value={amount}/>
+            <input type="text" placeholder="message" onChange={(event) => {setMessage(event.target.value);}} value={message}/>
             <div class="cheer-btn" onClick={handleNewCheer}>Cheer <img src="assets/eth.png" alt=""  className="likeIcon"/></div>
          
         </div>
