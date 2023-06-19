@@ -128,6 +128,7 @@ export default function Share() {
       like:[],
       dateTime:datetime
     });
+    setDetails("");
     console.log("added to cloud. Ref: "+docRef)
   };
 
@@ -171,6 +172,7 @@ export default function Share() {
             placeholder="What's on your mind ?"
             className="shareInput"
             onChange={handleDetailChange}
+            value={details}
           />
         </div>
         <hr className="shareHr" />

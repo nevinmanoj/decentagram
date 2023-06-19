@@ -28,7 +28,10 @@ const unsubscribe = onSnapshot(doc(db, "users", connectedAccount),(docSnap)=>{
   var postquery=isPublicFeed?
   query(collection(db, "posts"), orderBy("dateTime", "desc"))
   :query(collection(db, "posts"), orderBy("dateTime", "desc"),where("author", "in", docSnap.data()["following"]),)
+
+  //var postquery=query(collection(db, "posts"), orderBy("dateTime", "desc"),where("author", "in", docSnap.data()["following"]),)
   onSnapshot(postquery, (querySnapshot) => {
+   
     var keys = [];
     var posts = [];
     var followText=[];
@@ -50,6 +53,8 @@ const unsubscribe = onSnapshot(doc(db, "users", connectedAccount),(docSnap)=>{
    
     setData([keys, posts,followText]);
     
+  },(error)=>{
+    console.log(error);
   });
 });
     return () => {

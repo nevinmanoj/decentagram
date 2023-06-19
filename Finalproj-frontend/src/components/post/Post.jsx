@@ -2,7 +2,7 @@ import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import { useContext, useState,useEffect } from "react";
 import { testContext } from "../../context/testContext";
-import { getFirestore, updateDoc, arrayUnion, arrayRemove, doc } from 'firebase/firestore';
+import { getFirestore, updateDoc, arrayUnion, arrayRemove, doc,onSnapshot } from 'firebase/firestore';
 import { cheercontractAddress, cheercontractABI } from "./cheerConst";
 import Web3 from 'web3';
 import { getEthereumContract } from "../../context/testContext";
@@ -16,6 +16,7 @@ export default function Post({ post, id, followText }) {
   const [message, setMessage] = useState("");
   const [amount, setAmount] = useState("");
   const [cheerData, setcheerData] = useState([[],[],0]);
+  const [pp, setpp] = useState("");
 
   const likeHandler = async () => {
     const db = getFirestore();
@@ -121,6 +122,8 @@ export default function Post({ post, id, followText }) {
         setcheerData([chdata,names,x]);
     });
     }
+
+    
   useEffect(() => {
     const web3 = new Web3(window.ethereum);
    
@@ -131,6 +134,14 @@ export default function Post({ post, id, followText }) {
        getCheerData();
     });
     getCheerData();
+    const db = getFirestore();
+    const docRef = doc(db, "users",  post['author']);
+    const unsubscribe = onSnapshot(docRef, async (docSnap) => {
+      setpp(docSnap.data()['profilepic']);
+    });
+    return () => {
+      unsubscribe();
+  };
     
   }, [])
     
@@ -152,6 +163,11 @@ export default function Post({ post, id, followText }) {
               src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
               alt=""
             /> */}
+            <img className="postProfileImg" 
+           src={(pp===""||pp==null)?
+           "assets/pp.jpg":
+           "https://ipfs.io/ipfs/"+pp}
+          alt="" />
             <span className="postUsername">
               {post['username'].split("@")[0]}
 
