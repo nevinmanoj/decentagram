@@ -4,66 +4,44 @@ import {
   getFirestore, arrayRemove, doc,updateDoc, getDoc,onSnapshot
 } from 'firebase/firestore'; 
 import { testContext } from "../../context/testContext";
-// import { Users } from "../../dummyData";
-// import Online from "./onlineProfile";
 
-// export default function Rightbar({ profile }) {
-//   const HomeRightbar = () => {
-//     return (
-//       <>
-//         <div className="birthdayContainer">
-//           <img className="birthdayImg" src="assets/gift.png" alt="" />
-//           <span className="birthdayText">
-//             <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
-//           </span>
-//         </div>
-//         <img className="rightbarAd" src="assets/ad.png" alt="" />
-//         <h4 className="rightbarTitle">Online Friends</h4>
-//         <ul className="rightbarFriendList">
-//           {Users.map((u) => (
-//             <Online key={u.id} user={u} />
-//           ))}
-//         </ul>
-//       </>
-//     );
-//   };
-
-  // const ProfileRightbar = () => {
     export default function Rightbar() {
       const {connectedAccount}=useContext(testContext);
-      const [friendsData, setFriendsData] = useState([[],[]]);
+      const [followingsData, setFollowingsData] = useState([[],[],[]]);
+      const [followersData, setfollowersData] = useState(0);
       const [email, setemail] = useState("");
       useEffect(() => {
-        async function getFriends(){
-            var friendNames=[];
-            var friendpps=[];
+        async function getFollowings(){
+            var followingNames=[];
+            var followingpps=[];
            
             const db = getFirestore();
             const docRef = doc(db, "users", connectedAccount);
             // const docSnap = await getDoc(docRef);
             const unsubscribe = onSnapshot(docRef, async (docSnap) => {
-                const friendsList=docSnap.data()['following'];
-                for(var i=0;i<friendsList.length;i++){
-                    const friendRef = doc(db, "users", friendsList[i]);
+                const followingsList=docSnap.data()['following'];
+                for(var i=0;i<followingsList.length;i++){
+                    const followingRef = doc(db, "users", followingsList[i]);
                   
-                    const frienddocSnap = await getDoc(friendRef);
+                    const followingdocSnap = await getDoc(followingRef);
                     
-                    const friendName=frienddocSnap.data()['name'];
-                    const pp=frienddocSnap.data()['profilepic'];
+                    const followingName=followingdocSnap.data()['name'];
+                    const pp=followingdocSnap.data()['profilepic'];
                     
                     
-                    friendNames.push(friendName);
-                    friendpps.push(pp);
+                    followingNames.push(followingName);
+                    followingpps.push(pp);
                 }
                     setemail(docSnap.data()['email'])
-                    setFriendsData([friendsList,friendNames,friendpps]);
+                    setFollowingsData([followingsList,followingNames,followingpps]);
+                    setfollowersData(docSnap.data()['followers'].length)
             });
            
                 return () => {
                     unsubscribe();
                 };
         }
-        getFriends();
+        getFollowings();
       
     }, [connectedAccount]);
 
@@ -77,21 +55,25 @@ import { testContext } from "../../context/testContext";
             <span className="rightbarInfoKey">Email:</span>
             <span className="rightbarInfoValue">{email}</span>
           </div>
+          <div className="rightbarInfoItem">
+            <span className="rightbarInfoKey">Followers:</span>
+            <span className="rightbarInfoValue">{followersData}</span>
+          </div>
           
           
         </div>
-        <h4 className="rightbarTitle">Following</h4>
+        <h4 className="rightbarTitle">Following ({followingsData[0].length})</h4>
         <div className="rightbarFollowings">
           
-        {friendsData[0].map((f,i)=>( <div className="rightbarFollowing">
+        {followingsData[0].map((f,i)=>( <div className="rightbarFollowing">
             <img
-              src={(friendsData[2][i]===""||friendsData[2][i]==null)?
+              src={(followingsData[2][i]===""||followingsData[2][i]==null)?
               "assets/pp.jpg":
-              "https://ipfs.io/ipfs/"+friendsData[2][i]}
+              "https://ipfs.io/ipfs/"+followingsData[2][i]}
               alt=""
               className="rightbarFollowingImg"
             />
-            <span className="rightbarFollowingName">{friendsData[1][i]}</span>
+            <span className="rightbarFollowingName">{followingsData[1][i]}</span>
           </div>))}
 
 

@@ -6,6 +6,7 @@ import { getFirestore, updateDoc, arrayUnion, arrayRemove, doc } from 'firebase/
 import { cheercontractAddress, cheercontractABI } from "./cheerConst";
 import Web3 from 'web3';
 import { getEthereumContract } from "../../context/testContext";
+import { emphasize } from "@material-ui/core";
 
 
 export default function Post({ post, id, followText }) {
@@ -64,6 +65,14 @@ export default function Post({ post, id, followText }) {
   const handleNewCheer=async()=>{
     const web3 = new Web3(window.ethereum);
     const contractInstance = new web3.eth.Contract(cheercontractABI, cheercontractAddress);
+    if(amount===""){
+      alert("amount cannot be empty");
+      return
+    }
+    if(message===""){
+      alert("message cannot be empty");
+      return
+    }
     try {
       
       await contractInstance.methods.sendEth(post['author'],id,message).send({
