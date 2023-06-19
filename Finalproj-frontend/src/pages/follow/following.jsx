@@ -2,11 +2,10 @@ import {
     getFirestore, arrayRemove, doc,updateDoc, getDoc,onSnapshot
   } from 'firebase/firestore'; 
   import "./following.css"
-  import IconButton from '@mui/material/IconButton';
-  import DeleteIcon from '@mui/icons-material/Delete';
+
 import { useContext, useEffect,useState } from 'react';
 import { testContext } from '../../context/testContext';
-import Tooltip from '@mui/material/Tooltip';
+
 
 export default function Following(){
     const {connectedAccount}=useContext(testContext);
@@ -58,13 +57,20 @@ export default function Following(){
     return(<div class="outer-following">
         <h4>Following</h4>
          {friendsData[0].map((frnd, index) => (
-            <div>
-                {frnd}--{friendsData[1][index]}
-                <Tooltip title="Unfollow" enterDelay={500} >
-                <IconButton >
-             <DeleteIcon onClick={(e)=>{Unfollow(frnd);}}/>
-               </IconButton>
-               </Tooltip>
+            <div className='followingItemOuter'>
+                <div className="followingDetails">
+                <div className="followingAddress">
+                {frnd}
+                </div>
+                <div className="followingName">
+                {friendsData[1][index]}
+                </div>
+                </div>
+                
+                <div className="unfollowBtn" onClick={(e)=>{Unfollow(frnd);}}>
+                 Unfollow
+                </div>
+               
             </div>
         ))}
 
