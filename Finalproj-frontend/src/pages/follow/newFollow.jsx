@@ -59,7 +59,7 @@ export default function NewFollow(){
                     following: arrayUnion(Addr)
                   });
                 }
-                
+                setAddr("");
             }
             
         }
@@ -69,7 +69,7 @@ export default function NewFollow(){
     return(<div class="outer">
         <h4>Add New Friends</h4>
         <div class="wrapper">
-  <input type="text" placeholder='Enter address'  onChange={(e) => setAddr(e.target.value.toLowerCase())} />
+  <input type="text" placeholder='Enter address' className='addressInput'  onChange={(e) => setAddr(e.target.value.toLowerCase())} value={Addr} />
              <div class="add-btns" onClick={newFollow}>
                 Follow
             </div>

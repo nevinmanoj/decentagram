@@ -30,17 +30,24 @@ export default function Following(){
             // const docSnap = await getDoc(docRef);
             const unsubscribe = onSnapshot(docRef, async (docSnap) => {
                 var friendNames=[];
-                const friendsList=docSnap.data()['following'];
-                for(var i=0;i<friendsList.length;i++){
-                    const friendRef = doc(db, "users", friendsList[i]);
-                  
-                    const frienddocSnap = await getDoc(friendRef);
-                    
-                    const friendName=frienddocSnap.data()['name'];
-                   
-                    
-                    friendNames.push(friendName);
-                }
+                var friendsList=docSnap.data()['following'];
+                // var newList=[];
+                
+                    for(var i=0;i<friendsList.length;i++){
+                        const friendRef = doc(db, "users", friendsList[i]);
+                      
+                        const frienddocSnap = await getDoc(friendRef);
+                        
+                        const friendName=frienddocSnap.data()['name'];
+                       
+                        // for(var x=0;x<10;x++){
+                            friendNames.push(friendName);
+                            // newList.push(friendsList[i]);
+                        // }
+                        console.log(friendNames);
+                        
+                    }
+                
                   
                     setFriendsData([friendsList,friendNames]);
             });
@@ -54,16 +61,20 @@ export default function Following(){
     }, [connectedAccount]);
     
     
-    return(<div class="outer-following">
-        <h4>Following</h4>
+    return(
+        <div className='scrollable-container'>
+
+<div class="outer-following">
+        <h4 className='following-text'>Following</h4>
          {friendsData[0].map((frnd, index) => (
             <div className='followingItemOuter'>
                 <div className="followingDetails">
-                <div className="followingAddress">
-                {frnd}
-                </div>
+                
                 <div className="followingName">
                 {friendsData[1][index]}
+                </div>
+                <div className="followingAddress">
+                {frnd}
                 </div>
                 </div>
                 
@@ -74,5 +85,8 @@ export default function Following(){
             </div>
         ))}
 
-    </div>)
+    </div>
+
+        </div>
+    )
 }

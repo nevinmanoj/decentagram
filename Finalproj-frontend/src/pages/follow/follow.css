@@ -2,13 +2,14 @@
 .dash{
     display: flex;
     /* flex-direction: row; */
-    background-color: brown;
-    width:100vw
+    background-color: #fff;
+    width:100vw;
+    height:80vh;
     
 }
 .main-outer{
     height: 100vh;
-    background-color: rgb(205, 164, 244);
+    background-color: #fff;
 }
 
 /* .dashItem{

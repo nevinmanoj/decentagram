@@ -1,8 +1,107 @@
 .outer-followers{
-    background-color: aqua;
+    background-color: #FFFF;
     width:48vw;
-    height: 70vh;
+    /* height: 200vh; */
     margin-left: 1vw;
     margin-right: 1vw;
 
+
+
+
+}
+
+.scrollablefollower-container{
+
+    overflow: auto;
+    overflow-x: hidden;
+    /* box-shadow: 2px 0px 2px #c1c0c0; */
+    /* width: 45rem; */
+}
+
+.followersItemOuter {
+    display:flex;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    border-radius: 10px;
+    /* border: 1px solid rgb(171, 167, 167); */
+    padding-left: 2rem;
+    width: 48rem;
+    /* overflow: scroll; */
+    height: 3.7rem;
+
+    box-shadow: 3px 3px #c1c0c0;
+}
+
+.followerName {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+}
+.followerAddress {
+    opacity: 0.8;
+}
+
+.Unfollow-button {
+    border:1.5px solid rgb(208, 208, 208);
+  padding: 2px;
+  width: 8vw;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #7d7d7d;
+  margin-left: 5rem;
+  height: 2.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+
+}
+.follow-back-button {
+    border:1.5px solid #9DC08B;
+  padding: 2px;
+  /* width: 10vw; */
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  /* color: #7d7d7d; */
+  margin-left: 5rem;
+  height: 2.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 7rem;
+  /* text-decoration: #9DC08B; */
+  color: #9DC08B;
+
+}
+
+.deleteBtn {
+    border:1.5px solid red;
+    padding: 2px;
+  
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+   
+    margin-left: 5rem;
+    height: 2.5rem;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+   
+   
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  width: 5rem;
+  color: red;
+}
+
+.followers-text {
+    margin-left: 2rem;
+    margin-top: 1rem;
 }
