@@ -129,8 +129,8 @@ export const TestProvider = ({ children }) => {
                 name: name,
                 address: connectedAccount,
                 profilepic:"",
-                requests:[],
-                friends:[]
+                followers:[],
+                following:[]
 
             };
             await setDoc(doc(db, "users", connectedAccount), docData);
